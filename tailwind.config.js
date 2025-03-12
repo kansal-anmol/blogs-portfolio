@@ -7,6 +7,25 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
+				brand: {
+					light: "#FBF8F3",
+					dark: "#232332",
+					purple: "#7928CA",
+					pink: "#FF0080"
+				},
+				blue: {
+					lighter: "#71c5ee",
+					light: "#3182ce",
+					normal: "#025091"
+				},
+				card: {
+					dark: "rgba(255, 255, 255, 0.04)",
+					light: "rgba(255, 255, 255, 0.80)"
+				},
+				badge: {
+					dark: "rgba(226, 232, 240, 0.16)",
+					light: "#F8F0E3"
+				},
 				'accent-1': '#FAFAFA',
 				'accent-2': '#EAEAEA',
 				'accent-7': '#333',
@@ -69,5 +88,15 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [require('@tailwindcss/typography')],
+	plugins: [
+		require('@tailwindcss/typography'), 
+		function ({ addUtilities }) {
+			addUtilities({
+				".flex-center": {
+					display: "flex",
+					"align-items": "center",
+					"justify-content": "center"
+				}
+			});
+	}],
 };
