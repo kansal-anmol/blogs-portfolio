@@ -2,7 +2,7 @@ const { DEFAULT_AVATAR } = require('./consts/images');
 
 const DEFAULT_PHOTO = `${DEFAULT_AVATAR},format&format=webp`;
 
-const _resizeImage = (src, resize, defaultImage) => {
+const _resizeImage = (src: string, resize: Record<string, any>, defaultImage?: any): any => {
 	if (!src) {
 		return defaultImage;
 	} else {
@@ -81,7 +81,7 @@ const _resizeImage = (src, resize, defaultImage) => {
 
 exports.resizeImage = _resizeImage;
 
-exports.imageReplacer = (content, lazyLoad = false) => {
+exports.imageReplacer = (content: string, lazyLoad = false) => {
 	var regex = /<img src="([^"]+)"/g;
 	var srcVals = content.match(regex);
 
@@ -89,8 +89,8 @@ exports.imageReplacer = (content, lazyLoad = false) => {
 		return content;
 	}
 
-	var map = {};
-	srcVals.forEach((src) => {
+	var map: Record<string, any> = {};
+	srcVals.forEach((src: string) => {
 		src = src.split('src=')[1].replace(/"/g, '');
 		map[src] = _resizeImage(src, {});
 	});
@@ -104,7 +104,7 @@ exports.imageReplacer = (content, lazyLoad = false) => {
 	return content;
 };
 
-const _getBlurHash = (src) => {
+const _getBlurHash = (src: string) => {
 	if (src && src.indexOf('?') === -1) {
 		return `${src}?fm=blurhash`;
 	}

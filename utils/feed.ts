@@ -1,6 +1,6 @@
 import RSS from 'rss';
 
-const NON_ASCII_REGEX = /[\u{0080}-\u{FFFF}]/gu;
+const NON_ASCII_REGEX = /[^\x00-\x7F]/g;
 
 export const constructRSSFeedFromPosts = (
 	publication: any,
