@@ -47,7 +47,7 @@ export const SubscribeForm = () => {
 						ref={inputRef}
 						type="email"
 						placeholder="john@doe.com"
-						className="focus:outline-primary-600 dark:focus:outline-primary-500 left-3 top-3 w-full rounded-full p-3 text-base text-black outline-none dark:bg-neutral-950 dark:text-neutral-50"
+						className="outline-gray-200 dark:outline-gray-700 focus:outline-primary-600 dark:focus:outline-primary-500 left-3 top-3 w-full rounded-full p-3 text-base text-black outline-none dark:bg-neutral-950 dark:text-neutral-50"
 					/>
 					<button
 						disabled={requestInProgress}

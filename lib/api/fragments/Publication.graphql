@@ -9,10 +9,14 @@ fragment Publication on Publication {
 	followersCount
 	descriptionSEO
 	author {
+	    id
 		name
 		username
 		profilePicture
 		followersCount
+		bio {
+          html
+      }
 	}
 	ogMetaData {
 		image

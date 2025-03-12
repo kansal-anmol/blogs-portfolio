@@ -1,6 +1,7 @@
 import { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import '../styles/index.css';
+import { DarkModeProvider } from '@/components/contexts/darkModeContext';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
 	useEffect(() => {
@@ -11,5 +12,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 			i.style.height = `${parseInt(newHeight)}px`;
 		};
 	}, []);
-	return <Component {...pageProps} />;
+	return <DarkModeProvider>
+		<Component {...pageProps} />
+	</DarkModeProvider>;
 }

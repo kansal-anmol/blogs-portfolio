@@ -15,7 +15,6 @@ import { HeroPost } from '@/components/hero-post';
 import { ArticleSVG, ChevronDownSVG } from '@/components/icons';
 import { Layout } from '@/components/layout';
 import { MorePosts } from '@/components/more-posts';
-import { Navbar } from '@/components/navbar';
 import { SecondaryPost } from '@/components/secondary-post';
 import {
 	MorePostsByPublicationDocument,
@@ -29,6 +28,7 @@ import {
 	PublicationFragment,
 } from '../generated/graphql';
 import { DEFAULT_COVER } from '../utils/const';
+import { Search } from '@/components/searchbar';
 
 const SubscribeForm = dynamic(() =>
 	import('@/components/subscribe-form').then((mod) => mod.SubscribeForm),
@@ -86,7 +86,7 @@ export default function Index({ publication, initialAllPosts, initialPageInfo }:
 			<Layout>
 				<Head>
 					<title>
-						{publication.displayTitle || publication.title || 'Hashnode Blog Starter Kit'}
+						{publication.displayTitle || publication.title || 'Anmol Kansal'}
 					</title>
 					<meta
 						name="description"
@@ -97,7 +97,7 @@ export default function Index({ publication, initialAllPosts, initialPageInfo }:
 					<meta property="twitter:card" content="summary_large_image" />
 					<meta
 						property="twitter:title"
-						content={publication.displayTitle || publication.title || 'Hashnode Blog Starter Kit'}
+						content={publication.displayTitle || publication.title || 'Anmol Kansal'}
 					/>
 					<meta
 						property="twitter:description"
@@ -122,7 +122,9 @@ export default function Index({ publication, initialAllPosts, initialPageInfo }:
 				</Head>
 				<Header />
 				<Container className="flex flex-col items-stretch gap-10 px-5 pb-10">
-					<Navbar />
+					<div className="pt-10 text-sm w-full lg:w-9/12 xl:w-7/12  mx-auto" >
+						<Search />
+					</div>
 
 					{allPosts.length === 0 && (
 						<div className="grid grid-cols-1 py-20 lg:grid-cols-3">
@@ -152,16 +154,7 @@ export default function Index({ publication, initialAllPosts, initialPageInfo }:
 						<div className="col-span-1 flex flex-col gap-6">{secondaryPosts}</div>
 					</div>
 
-					{allPosts.length > 0 && (
-						<div className="bg-primary-50 grid grid-cols-4 rounded-lg px-5 py-5 dark:bg-neutral-900 md:py-10">
-							<div className="col-span-full md:col-span-2 md:col-start-2">
-								<h2 className="text-primary-600 dark:text-primary-500 mb-5 text-center text-lg font-semibold">
-									Subscribe to our newsletter for updates and changelog.
-								</h2>
-								<SubscribeForm />
-							</div>
-						</div>
-					)}
+
 
 					{morePosts.length > 0 && (
 						<>

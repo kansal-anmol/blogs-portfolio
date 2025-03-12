@@ -8,6 +8,8 @@ import NewsletterPlusSVG from './NewsletterPlusSVG';
 import PlusCircleSVG from './PlusCircleSVG';
 import RssSVG from './RssSVG';
 import XSVG from './XSVG';
+import MoonSVG from './MoonSVG'
+import SunSVG from './SunSVG'
 
 export {
 	ArticleSVG,
@@ -20,4 +22,6 @@ export {
 	PlusCircleSVG,
 	RssSVG,
 	XSVG,
+	MoonSVG,
+	SunSVG
 };
