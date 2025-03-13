@@ -24,13 +24,13 @@ const EXPERIENCES = [
 	{
 		id: "1",
 		role: "Senior Product Engineer",
-		time: "April, 2023 - Present",
+		time: "April, 2023 - May, 2024",
 		company: "Sprinklr",
 		location: "Gurugram, India",
 		companyDescription:
 			"Sprinklr is the world's first Modern Customer Experience Management (CXM) platform that helps brands make their customers happier",
 		responsibilities: [
-			"Maintaining a single page application (SPA) having 30+ routes by working in collaboration with Backend Developers, Product Managers and Designers etc",
+			"Maintained a single page application (SPA) having 30+ routes by working in collaboration with Backend Developers, Product Managers and Designers etc",
 			"Languages and Tools - HTML, CSS, JavaScript, TypeScript, ReactJS, Next, Jest, Redux, Apollo GraphQL Client, Git etc",
 			"Provided mentorship to two new team members, facilitating their successful onboarding and contributing to their professional development within the organization",
 			"Top performer for major release of Distributed platform in Q2, Q3 and Q4 2023",
