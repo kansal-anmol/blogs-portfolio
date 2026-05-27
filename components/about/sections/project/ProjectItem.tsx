@@ -1,6 +1,6 @@
 import { Suspense, } from "react";
 import Link from "next/link";
-import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
+import ImageGallery, { GalleryItem } from "react-image-gallery";
 import { Loader } from "@/components/about/loader";
 import { VscSourceControl } from "react-icons/vsc";
 import { FiExternalLink } from "react-icons/fi";
@@ -26,7 +26,7 @@ export function ProjectItem({ project, index }: { index: number; project: Projec
 				<div className="aspect-[12/9.2] w-full h-full">
 					<Suspense fallback={<Loader />}>
 						<ImageGallery
-							items={galleryImages as ReactImageGalleryItem[]}
+							items={galleryImages as GalleryItem[]}
 							showPlayButton={false}
 							showThumbnails={false}
 							showIndex

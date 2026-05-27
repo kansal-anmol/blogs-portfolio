@@ -51,7 +51,12 @@ const config = {
 		scrollRestoration: true,
 	},
 	images: {
-		domains: ['cdn.hashnode.com'], // Updated images config
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'cdn.hashnode.com',
+			},
+		],
 		unoptimized: true,
 	},
 	async rewrites() {
