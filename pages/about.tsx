@@ -4,16 +4,16 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { Layout } from '@/components/layout';
 import Head from 'next/head';
-import request from 'graphql-request';
 import { GetStaticProps } from 'next';
-import { PublicationByHostDocument, PublicationFragment } from '@/generated/graphql';
+import { Publication } from '@/lib/types';
+import { getPublicationData } from '@/lib/local-publication';
 import { ProjectsSection, TechnologiesSection, WelcomeSection } from '@/components/about/sections';
 import { ExperienceSection } from '@/components/about/sections/Experience';
 import { EducationSection } from '@/components/about/sections/Education';
 import { AchievementsSection } from '@/components/about/sections/Achievements';
 
 type Props = {
-    publication: PublicationFragment;
+    publication: Publication;
 };
 
 export default function About({ publication }: Props) {
@@ -51,18 +51,12 @@ export default function About({ publication }: Props) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    const data = await request(
-        process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT,
-        PublicationByHostDocument,
-        {
-            host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST,
-        }
-    );
+    const publication = getPublicationData();
 
     return {
         props: {
-            publication: data.publication,
+            publication,
         },
-        revalidate: 1,
+        revalidate: 60,
     };
 };

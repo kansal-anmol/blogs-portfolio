@@ -1,11 +1,10 @@
 import { resizeImage } from '@/utils/image';
 import Link from 'next/link';
-import { User } from '../generated/graphql';
+import { Author } from '../lib/types';
 import { DEFAULT_COVER } from '../utils/const';
 import { CoverImage } from './cover-image';
 import { DateFormatter } from './date-formatter';
 
-type Author = Pick<User, 'name' | 'profilePicture'>;
 
 type Props = {
 	title: string;

@@ -5,7 +5,7 @@ import { Loader } from "@/components/about/loader";
 import { VscSourceControl } from "react-icons/vsc";
 import { FiExternalLink } from "react-icons/fi";
 
-import "react-image-gallery/styles/css/image-gallery.css";
+import "react-image-gallery/styles/image-gallery.css";
 import { Project } from "@/components/about/constants/projects";
 
 export function ProjectItem({ project, index }: { index: number; project: Project }) {

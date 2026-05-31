@@ -1,20 +1,12 @@
 import { resizeImage } from '@/utils/image';
-import request from 'graphql-request';
 import Link from 'next/link';
 import { KeyboardEventHandler, useEffect, useRef, useState } from 'react';
-import {
-	SearchPostsOfPublicationDocument,
-	SearchPostsOfPublicationQuery,
-	SearchPostsOfPublicationQueryVariables,
-} from '../generated/graphql';
+import { Post } from '../lib/types';
 import { DEFAULT_COVER } from '../utils/const';
 import { useAppContext } from './contexts/appContext';
 import { CoverImage } from './cover-image';
 
-const GQL_ENDPOINT = process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT;
 const NO_OF_SEARCH_RESULTS = 5;
-
-type Post = SearchPostsOfPublicationQuery['searchPostsOfPublication']['edges'][0]['node'];
 
 export const Search = () => {
 	const { publication } = useAppContext();
@@ -53,17 +45,16 @@ export const Search = () => {
 
 		timerRef.current = setTimeout(async () => {
 			setIsSearching(true);
-
-			const data = await request<
-				SearchPostsOfPublicationQuery,
-				SearchPostsOfPublicationQueryVariables
-			>(GQL_ENDPOINT, SearchPostsOfPublicationDocument, {
-				first: NO_OF_SEARCH_RESULTS,
-				filter: { query, publicationId: publication.id },
-			});
-			const posts = data.searchPostsOfPublication.edges.map((edge) => edge.node);
-			setSearchResults(posts);
-			setIsSearching(false);
+			try {
+				const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+				const data = await response.json();
+				const posts = data.searchPostsOfPublication.edges.map((edge: any) => edge.node);
+				setSearchResults(posts);
+			} catch (err) {
+				console.error(err);
+			} finally {
+				setIsSearching(false);
+			}
 		}, 500);
 	};
 

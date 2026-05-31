@@ -1,7 +1,7 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { PublicationNavbarItem } from '../generated/graphql';
+import { NavbarItem } from '../lib/types';
 import { Button } from './button';
 import { useAppContext } from './contexts/appContext';
 import CloseSVG from './icons/svgs/CloseSVG';
@@ -10,7 +10,7 @@ import { SocialLinks } from './social-links';
 
 type Props = {
 	toggleSidebar: () => void;
-	navbarItems: (PublicationNavbarItem & { url: string })[];
+	navbarItems: NavbarItem[];
 };
 
 function PublicationSidebar(props: Props) {

@@ -1,14 +1,14 @@
 import PostAuthorInfo from './post-author-info';
 import { useAppContext } from './contexts/appContext';
-import { PostFullFragment } from '../generated/graphql';
+import { Post } from '../lib/types';
 
 function AboutAuthor() {
-  const { post: _post } = useAppContext();
-  const post = _post as unknown as PostFullFragment;
-  const { publication, author } = post;
-  let coAuthors = post.coAuthors || [];
+  const { post, publication } = useAppContext();
+  if (!post) return null;
+  const author = post.author || publication.author;
+  const coAuthors: any[] = [];
 
-  const allAuthors = publication?.isTeam ? [author, ...coAuthors] : [author];
+  const allAuthors = [author];
 
   return (
     <div className="mx-auto w-full px-5 md:max-w-screen-md mb-5 mt-10 flex flex-col gap-16">
@@ -21,7 +21,7 @@ function AboutAuthor() {
             {allAuthors.map((_author) => {
               return (
                 <PostAuthorInfo
-                  key={_author.id.toString()}
+                  key={_author.id}
                   author={_author}
                 />
               );

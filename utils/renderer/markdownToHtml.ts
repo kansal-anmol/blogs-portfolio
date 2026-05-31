@@ -1,13 +1,15 @@
 import sanitizeHtml from 'sanitize-html';
 import sanitizeHtmlOptions from './sanitizeHTMLOptions';
 
-const marked = require('./marked');
-const renderer = new marked.Renderer();
+const markedModule = require('./marked');
+const marked = markedModule.default || markedModule;
+const RendererClass = marked.Renderer || markedModule.Renderer;
+const renderer = new RendererClass();
 const imageReplacer = require('./image').imageReplacer;
 
 // @ts-ignore
 renderer.link = function (href, title, text) {
-	var link = marked.Renderer.prototype.link.call(this, href, title, text);
+	var link = RendererClass.prototype.link.call(this, href, title, text);
 	var linkIsUserMention =
 		title &&
 		title.includes('s Profile - Hashnode') &&

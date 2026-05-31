@@ -1,7 +1,5 @@
-import { PostFullFragment } from '../generated/graphql';
+import { Post, TableOfContentsItem } from '../lib/types';
 import { useAppContext } from './contexts/appContext';
-
-type TableOfContentsItem = PostFullFragment['features']['tableOfContents']['items'][number];
 
 const mapTableOfContentItems = (toc: TableOfContentsItem[]) => {
 	try {
@@ -61,7 +59,7 @@ export const PostTOC = () => {
 		<div className="w-full px-5">
 			<div className="mx-auto w-full max-w-screen-md rounded-lg border border-b-4 border-r-4 p-5 text-base leading-snug dark:border-neutral-800 dark:text-neutral-50 md:p-8 md:text-lg">
 				<h2 className="mb-5 text-lg font-bold md:text-xl">Table of contents</h2>
-				<Toc parentId={null} data={mapTableOfContentItems(post.features.tableOfContents.items)} />
+				<Toc parentId={null} data={mapTableOfContentItems(post.features?.tableOfContents?.items ?? [])} />
 			</div>
 		</div>
 	);

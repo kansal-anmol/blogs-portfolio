@@ -1,5 +1,4 @@
 import { resizeImage } from '@/utils/image';
-import request from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import { Container } from '@/components/container';
@@ -9,20 +8,15 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { Layout } from '@/components/layout';
 import { MorePosts } from '@/components/more-posts';
-import {
-	PostFragment,
-	PublicationFragment,
-	SeriesFragment,
-	SeriesPostsByPublicationDocument,
-	SeriesPostsByPublicationQuery,
-	SeriesPostsByPublicationQueryVariables,
-} from '../../generated/graphql';
+import type { Post, Publication, Series } from '../../lib/types';
 import { DEFAULT_COVER } from '../../utils/const';
+import { getAllPosts } from '@/lib/local-blogs';
+import { getPublicationData } from '@/lib/local-publication';
 
 type Props = {
-	series: SeriesFragment;
-	posts: PostFragment[];
-	publication: PublicationFragment;
+	series: Series;
+	posts: Post[];
+	publication: Publication;
 };
 
 export default function Post({ series, publication, posts }: Props) {
@@ -86,32 +80,26 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
 	if (!params) {
 		throw new Error('No params');
 	}
-	const data = await request<SeriesPostsByPublicationQuery, SeriesPostsByPublicationQueryVariables>(
-		process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT,
-		SeriesPostsByPublicationDocument,
-		{
-			host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST,
-			first: 20,
-			seriesSlug: params.slug,
-		},
-	);
 
-	const publication = data.publication;
-	const series = publication?.series;
-	if (!publication || !series) {
-		return {
-			notFound: true,
-		};
-	}
-	const posts = publication.series ? publication.series.posts.edges.map((edge) => edge.node) : [];
+	const publication = getPublicationData();
+	const seriesSlug = params.slug;
+	const series: Series = {
+		id: seriesSlug,
+		name: seriesSlug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
+		slug: seriesSlug,
+		description: {
+			html: `<p>A beautiful collection of posts in the ${seriesSlug} series.</p>`,
+		},
+		coverImage: null,
+	};
 
 	return {
 		props: {
 			series,
-			posts,
+			posts: [],
 			publication,
 		},
-		revalidate: 1,
+		revalidate: 60,
 	};
 };
 

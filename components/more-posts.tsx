@@ -1,8 +1,8 @@
-import { PostFragment } from '../generated/graphql';
+import { Post } from '../lib/types';
 import { PostPreview } from './post-preview';
 
 type Props = {
-	posts: PostFragment[];
+	posts: Post[];
 	context: 'home' | 'series' | 'tag';
 };
 
@@ -21,10 +21,7 @@ export const MorePosts = ({ posts, context }: Props) => {
 						title={post.title}
 						coverImage={post.coverImage?.url}
 						date={post.publishedAt}
-						author={{
-							name: post.author.name,
-							profilePicture: post.author.profilePicture,
-						}}
+						author={post.author || { id: '', name: '', username: '', profilePicture: '' }}
 						slug={post.slug}
 						excerpt={post.brief}
 					/>

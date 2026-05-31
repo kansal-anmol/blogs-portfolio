@@ -1,4 +1,3 @@
-import request from 'graphql-request';
 import Head from 'next/head';
 import { Container } from '@/components/container';
 import { AppProvider } from '@/components/contexts/appContext';
@@ -6,13 +5,9 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { Layout } from '@/components/layout';
 import { MorePosts } from '@/components/more-posts';
-import {
-	type Post,
-	Publication,
-	TagPostsByPublicationDocument,
-	TagPostsByPublicationQuery,
-	TagPostsByPublicationQueryVariables,
-} from '../../generated/graphql';
+import type { Post, Publication } from '../../lib/types';
+import { getPostsByTag } from '@/lib/local-blogs';
+import { getPublicationData } from '@/lib/local-publication';
 
 type Props = {
 	posts: Post[];
@@ -49,23 +44,8 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-	const data = await request<TagPostsByPublicationQuery, TagPostsByPublicationQueryVariables>(
-		process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT,
-		TagPostsByPublicationDocument,
-		{
-			host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST,
-			first: 20,
-			tagSlug: params.slug,
-		},
-	);
-
-	const publication = data.publication;
-	if (!publication) {
-		return {
-			notFound: true,
-		};
-	}
-	const posts = publication.posts.edges.map((edge) => edge.node);
+	const publication = getPublicationData();
+	const posts = await getPostsByTag(params.slug);
 
 	return {
 		props: {
@@ -73,7 +53,7 @@ export async function getStaticProps({ params }: Params) {
 			publication,
 			tag: params.slug,
 		},
-		revalidate: 1,
+		revalidate: 60,
 	};
 }
 

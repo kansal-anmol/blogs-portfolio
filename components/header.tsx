@@ -1,6 +1,6 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useState } from 'react';
-import { PublicationNavbarItem, PublicationNavigationType } from '../generated/graphql';
+import { NavbarItem } from '../lib/types';
 import { Button } from './button';
 import { Container } from './container';
 import HamburgerSVG from './icons/svgs/HamburgerSVG';
@@ -10,9 +10,9 @@ import { useDarkMode } from './contexts/darkModeContext';
 import { MoonSVG, SunSVG } from './icons';
 import Link from 'next/link';
 
-const navbarItems: (PublicationNavbarItem & { url: string; })[] = [
-	{ label: 'Home', url: '/', id: 'home', type: PublicationNavigationType.Page },
-	{ id: 'about', label: 'About', url: '/about', type: PublicationNavigationType.Page },
+const navbarItems: NavbarItem[] = [
+	{ label: 'Home', url: '/', id: 'home', type: 'page' },
+	{ id: 'about', label: 'About', url: '/about', type: 'page' },
 ];
 
 export const Header = () => {

@@ -3,9 +3,56 @@
  * Copyright (c) 2011-2014, Christopher Jeffrey. (MIT Licensed)
  * https://github.com/chjj/marked
  */
-const { ImageAlignment } = require('./image');
-const { HeadingSlugger } = require('./headingSlugger');
+const sanitizeHtmlModule = require('sanitize-html');
+const sanitizeHtml = sanitizeHtmlModule.default || sanitizeHtmlModule;
+const slugModule = require('slug');
+const slug = slugModule.default || slugModule;
 const { default: isURL } = require('validator/lib/isURL');
+
+const ImageAlignment = {
+	Center: 'center',
+	Left: 'left',
+	Right: 'right',
+};
+
+class HeadingSlugger {
+	constructor() {
+		this.headings = {};
+	}
+
+	static sanitizeSlug(str) {
+		return slug(sanitizeHtml(str, { allowedTags: [] }), { lower: true });
+	}
+
+	doesHeadingExist(slugStr) {
+		return Object.prototype.hasOwnProperty.call(this.headings, slugStr);
+	}
+
+	findSafeSlug(originalSlug) {
+		const headingExists = this.doesHeadingExist(originalSlug);
+
+		if (!headingExists) {
+			this.headings[originalSlug] = 0;
+			return originalSlug;
+		}
+		let modifiedSlug;
+		let duplicateCount = this.headings[originalSlug];
+
+		do {
+			duplicateCount += 1;
+			modifiedSlug = `${originalSlug}-${duplicateCount}`;
+		} while (this.doesHeadingExist(modifiedSlug));
+
+		this.headings[modifiedSlug] = 0;
+		this.headings[originalSlug] += 1;
+		return modifiedSlug;
+	}
+
+	getSlug(str) {
+		const sanitizedSlug = HeadingSlugger.sanitizeSlug(str);
+		return this.findSafeSlug(sanitizedSlug);
+	}
+}
 
 (function () {
 	/**
