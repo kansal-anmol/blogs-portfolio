@@ -5,7 +5,7 @@ brief: "Introduction When working with multiple asynchronous operations in JavaS
 coverImage: "/assets/blog/covers/implementing-a-polyfill-for-promiseallsettled-in-javascript.png"
 publishedAt: "2025-03-28T18:30:00.000Z"
 readTimeInMinutes: 3
-tags: ["javascript","javascript-framework","promises","interview-questions"]
+tags: ["JavaScript"]
 ---
 
 ### Introduction

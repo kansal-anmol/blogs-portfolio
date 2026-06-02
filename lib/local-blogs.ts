@@ -1,10 +1,10 @@
 import fs from 'fs';
-import path from 'path';
 import matter from 'gray-matter';
+import path from 'path';
 import { remark } from 'remark';
 import html from 'remark-html';
-import { Post, TableOfContentsItem } from './types';
 import { getPublicationData } from './local-publication';
+import { Post, TableOfContentsItem } from './types';
 
 const POSTS_DIRECTORY = path.join(process.cwd(), '_posts');
 
@@ -23,9 +23,9 @@ function parseTableOfContents(markdown: string): TableOfContentsItem[] {
 			.replace(/[^a-z0-9\s-]/g, '')
 			.trim()
 			.replace(/\s+/g, '-');
-		
+
 		const id = `heading-${index}`;
-		
+
 		// Find parent: the closest preceding heading with level < current level
 		let parentId: string | null = null;
 		for (let l = level - 1; l >= 2; l--) {
@@ -34,26 +34,26 @@ function parseTableOfContents(markdown: string): TableOfContentsItem[] {
 				break;
 			}
 		}
-		
+
 		items.push({
 			id,
 			level,
 			slug,
 			title: rawTitle,
-			parentId
+			parentId,
 		});
-		
+
 		lastHeadingByLevel[level] = id;
 		for (let l = level + 1; l <= 6; l++) {
 			delete lastHeadingByLevel[l];
 		}
-		
+
 		index++;
 	}
 	return items;
 }
 
-export interface LocalPost {
+interface LocalPost {
 	id: string;
 	title: string;
 	slug: string;
@@ -66,14 +66,14 @@ export interface LocalPost {
 	content: string;
 }
 
-// Convert markdown to HTML string for the RSS feed
-export async function markdownToHtmlString(markdown: string): Promise<string> {
+// Convert markdown to HTML string
+async function markdownToHtmlString(markdown: string): Promise<string> {
 	const result = await remark().use(html).process(markdown);
 	return result.toString();
 }
 
 // Read markdown files and parse frontmatter
-export async function getPostFromMDFile(fileName: string): Promise<LocalPost> {
+async function getPostFromMDFile(fileName: string): Promise<LocalPost> {
 	const slug = fileName.replace(/\.md$/, '');
 	const filePath = path.join(POSTS_DIRECTORY, fileName);
 	const fileContents = fs.readFileSync(filePath, 'utf8');
@@ -87,7 +87,8 @@ export async function getPostFromMDFile(fileName: string): Promise<LocalPost> {
 		coverImage: data.coverImage || '',
 		publishedAt: data.publishedAt || new Date().toISOString(),
 		updatedAt: data.updatedAt || data.publishedAt || new Date().toISOString(),
-		readTimeInMinutes: data.readTimeInMinutes || Math.max(1, Math.ceil(content.split(/\s+/).length / 200)),
+		readTimeInMinutes:
+			data.readTimeInMinutes || Math.max(1, Math.ceil(content.split(/\s+/).length / 200)),
 		tags: Array.isArray(data.tags) ? data.tags : [],
 		content,
 	};
@@ -117,12 +118,19 @@ export async function getAllPosts(): Promise<Post[]> {
 					username: publication.author.username,
 					profilePicture: publication.author.profilePicture,
 				},
+				tags: localPost.tags.map((tag) => ({
+					id: tag,
+					name: tag,
+					slug: tag,
+				})),
 			} as Post;
 		});
 
 	const posts = await Promise.all(postsPromises);
 	// Sort posts by date descending
-	return posts.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+	return posts.sort(
+		(a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+	);
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
@@ -176,39 +184,4 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 			},
 		},
 	};
-}
-
-export async function getPostsByTag(tagSlug: string): Promise<Post[]> {
-	if (!fs.existsSync(POSTS_DIRECTORY)) {
-		return [];
-	}
-	const fileNames = fs.readdirSync(POSTS_DIRECTORY);
-	const postsPromises = fileNames
-		.filter((fileName) => fileName.endsWith('.md'))
-		.map(async (fileName) => {
-			const localPost = await getPostFromMDFile(fileName);
-			if (localPost.tags.some((tag) => tag.toLowerCase() === tagSlug.toLowerCase())) {
-				const publication = getPublicationData();
-				return {
-					id: localPost.id,
-					title: localPost.title,
-					slug: localPost.slug,
-					brief: localPost.brief,
-					coverImage: localPost.coverImage ? { url: localPost.coverImage } : null,
-					publishedAt: localPost.publishedAt,
-					readTimeInMinutes: localPost.readTimeInMinutes,
-					author: {
-						id: publication.author.id,
-						name: publication.author.name,
-						username: publication.author.username,
-						profilePicture: publication.author.profilePicture,
-					},
-				} as Post;
-			}
-			return null;
-		});
-
-	const posts = await Promise.all(postsPromises);
-	const filteredPosts = posts.filter((post): post is Post => post !== null);
-	return filteredPosts.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 }

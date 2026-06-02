@@ -5,7 +5,7 @@ brief: "In this post, we will learn how to implement a polyfill for useMemo in R
 coverImage: "/assets/blog/covers/creating-a-polyfill-for-usememo-in-reactjs.png"
 publishedAt: "2025-03-09T10:30:25.849Z"
 readTimeInMinutes: 2
-tags: ["javascript","reactjs","anmol-kansal","reacthooks","react-interview-question"]
+tags: ["JavaScript","React"]
 ---
 
 ## In this post, we will learn how to implement a polyfill for useMemo in ReactJS

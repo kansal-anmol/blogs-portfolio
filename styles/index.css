@@ -164,3 +164,59 @@
 .icon-link-btn--active {
     @apply bg-badge-light dark:bg-badge-dark;
 }
+
+/* Custom Fonts & Scrollbar utility */
+.font-heading {
+	font-family: 'Geist', sans-serif;
+}
+
+.font-body {
+	font-family: 'Inter', sans-serif;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+	display: none;
+}
+.scrollbar-none {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+/* Custom dark prose theme overrides */
+.prose-custom {
+  --tw-prose-body: #d1d1d1;
+  --tw-prose-headings: #ffffff;
+  --tw-prose-lead: #a3a3a3;
+  --tw-prose-links: #b5f542;
+  --tw-prose-bold: #ffffff;
+  --tw-prose-counters: #666;
+  --tw-prose-bullets: #444;
+  --tw-prose-hr: #222222;
+  --tw-prose-quotes: #d1d1d1;
+  --tw-prose-quote-borders: #b5f542;
+  --tw-prose-captions: #666;
+  --tw-prose-code: #b5f542;
+  --tw-prose-pre-code: #d1d1d1;
+  --tw-prose-pre-bg: #111111;
+  --tw-prose-th-borders: #333;
+  --tw-prose-td-borders: #222;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+[data-callout] {
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+  border-left-width: 3px;
+  font-family: var(--font-sans), sans-serif;
+}
+[data-callout="tip"]     { background: #0f1f06; border-color: #b5f542; color: #c8e89a; }
+[data-callout="info"]    { background: #051525; border-color: #3b82f6; color: #93c5fd; }
+[data-callout="warning"] { background: #1f1200; border-color: #f59e0b; color: #fcd34d; }
+[data-callout="danger"]  { background: #1f0505; border-color: #ef4444; color: #fca5a5; }

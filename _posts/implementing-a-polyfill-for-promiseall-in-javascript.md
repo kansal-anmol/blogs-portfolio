@@ -5,7 +5,7 @@ brief: "Promise.all is a powerful built-in helper function in JavaScript that ta
 coverImage: "/assets/blog/covers/implementing-a-polyfill-for-promiseall-in-javascript.png"
 publishedAt: "2025-03-15T11:30:22.915Z"
 readTimeInMinutes: 2
-tags: ["javascript","javascript-promises","interview-preparations"]
+tags: ["JavaScript"]
 ---
 
 `Promise.all` is a powerful built-in helper function in JavaScript that takes an array of promises and returns a new promise that resolves when all the given promises have resolved or rejects if any promise fails. But have you ever wondered how you can implement it yourself? Let’s dive in! 🏊‍♂️

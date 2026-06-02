@@ -5,7 +5,7 @@ brief: "React’s useCallback is a powerful hook that helps optimize your compon
 coverImage: "/assets/blog/covers/creating-a-polyfill-for-usecallback-in-reactjs.png"
 publishedAt: "2025-03-06T18:02:09.850Z"
 readTimeInMinutes: 2
-tags: ["anmol-kansal","reactjs","reacthooks","react-interview-question","javascript"]
+tags: ["JavaScript","React"]
 ---
 
 React’s `useCallback` is a powerful hook that helps optimize your components by **memoizing functions**. But have you ever wondered how it works behind the scenes?

@@ -5,7 +5,7 @@ brief: "Hey there, TypeScript tinkerers! 👋 Ever thought about how doesReturnT
 coverImage: "/assets/blog/covers/implement-returntype-t-utility-type-from-scratch-in-typescript-07ca7e790c0d.png"
 publishedAt: "2025-06-17T17:45:16.482Z"
 readTimeInMinutes: 2
-tags: ["typescript","typescript-tutorial"]
+tags: ["TypeScript"]
 ---
 
 Hey there, TypeScript tinkerers! 👋

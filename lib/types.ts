@@ -96,15 +96,8 @@ export interface Publication {
 	metaTags?: string | null;
 }
 
-export interface Series {
-	id: string;
-	name: string;
-	slug: string;
-	description?: {
-		html: string;
-	};
-	coverImage?: string | null;
-}
+
+
 
 export interface StaticPage {
 	id: string;

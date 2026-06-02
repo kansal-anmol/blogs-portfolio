@@ -5,7 +5,7 @@ brief: "Managing the global state is a common challenge in React. While tools li
 coverImage: "/assets/blog/covers/global-state-in-react-without-context-api-or-external-libraries.png"
 publishedAt: "2025-04-05T17:38:43.356Z"
 readTimeInMinutes: 2
-tags: ["reactjs","custom-hooks","javascript","frontend-development","frontend","web-development","webdev","state-management"]
+tags: ["React","JavaScript"]
 ---
 
 Managing the global state is a common challenge in React. While tools like Redux, Zustand, or even React’s built-in Context API are popular choices, they can sometimes feel like overkill for simpler use cases.

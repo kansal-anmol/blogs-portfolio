@@ -12,7 +12,7 @@ export const getPublicationData = (): Publication => {
 			id: '6257ac97049d83cc3e3ad350',
 			name: 'Anmol Kansal',
 			username: 'kansalanmol0609',
-			profilePicture: 'https://cdn.hashnode.com/res/hashnode/image/upload/v1672332837004/iwqHqiwtx.jpg',
+			profilePicture: '/assets/profile.jpg',
 			bio: {
 				html: '<p>Web Development allows me to bring my ideas to life. </p>\n<p>Passionate about Web Development and Proficient in Data Structures and Algorithms, I like to solve challenging problems.</p>\n',
 			},
@@ -28,9 +28,8 @@ export const getPublicationData = (): Publication => {
 			navbarItems: [],
 		},
 		links: {
-			twitter: 'https://x.com/kansalanmol0609',
-			github: 'https://github.com/kansalanmol0609',
-			linkedin: 'https://www.linkedin.com/in/kansalanmol0609/',
+			github: 'https://github.com/kansal-anmol',
+			linkedin: 'https://www.linkedin.com/in/kansal-anmol/',
 			hashnode: 'https://hashnode.com/@kansalanmol0609',
 		},
 	};

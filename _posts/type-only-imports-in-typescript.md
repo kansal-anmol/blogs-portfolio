@@ -5,7 +5,7 @@ brief: "Since the introduction of type-only imports in TypeScript 3.8, a lot of 
 coverImage: "/assets/blog/covers/type-only-imports-in-typescript.png"
 publishedAt: "2023-01-22T14:20:35.756Z"
 readTimeInMinutes: 4
-tags: ["typescript","types","type-imports","tsc"]
+tags: ["TypeScript"]
 ---
 
 Since the introduction of type-only imports in TypeScript 3.8, a lot of developers including me have been confused about the usage of type-only imports. If we read the official docs, it says -
@@ -16,7 +16,11 @@ Since the introduction of type-only imports in TypeScript 3.8, a lot of develope
 
 But isn't typescript code supposed to cease automatically at runtime? Why do we need type-only imports?
 
+### 🧠 Transpilation Basics
+
 To understand this, First, we need to understand how single-file transpilers (like Babel) work.
+
+### 📂 An Example: The Three-File Structure
 
 Suppose we have the following 3 files -
 
@@ -50,6 +54,8 @@ Suppose we have the following 3 files -
     export { Component, Props };
     ```
     
+
+### ⚡ Transpilation Output Analysis
 
 Now, let's see what will the corresponding output JS files look like when they are passed through a single file transpiler -
 
@@ -89,6 +95,8 @@ If we compare the above outputs, we can see that all the typescript-only code (t
 
 If we run this JS code, we will get a runtime error ❗️ since there is no named export `Props` in `types.js` file
 
+### 🔎 Why Babel Fails in index.ts
+
 Now, let's see how our transpiler was able to remove typescript-only code in each of the files -
 
 1. `Component.tsx` - Here, the import `Props` is being used as a `type` in the file itself, So it is able to deduce that `Props` is indeed a type and can safely remove it.
@@ -119,6 +127,8 @@ Now, let's see how our transpiler was able to remove typescript-only code in eac
     ```
     
 
+### 🚀 The Solution: Type-Only Imports
+
 To fix this, we can mark `Props` import as `type-only` -
 
 ```typescript
@@ -144,7 +154,7 @@ import { Props } from "./types";
 export { Component, Props };
 ```
 
-So, to summarize this 🔖-
+### 📌 Summary & Best Practices
 
 * If we are importing a `type` and using it in the same file, we do not need to use `type` since even a single file transpiler can understand from the context that it is a `type` .
     

@@ -26,6 +26,20 @@ renderer.link = function (href, title, text) {
 };
 
 // @ts-ignore
+renderer.heading = function (text, level, raw) {
+	const slug = raw
+		.trim()
+		.replace(/\*+/g, '')
+		.replace(/`+/g, '')
+		.toLowerCase()
+		.replace(/[^a-z0-9\s-]/g, '')
+		.trim()
+		.replace(/\s+/g, '-');
+
+	return '<h' + level + ' id="' + slug + '">' + text + '</h' + level + '>';
+};
+
+// @ts-ignore
 renderer.tablecell = function (content) {
 	var chunks = content.split('&lt;br&gt;-');
 

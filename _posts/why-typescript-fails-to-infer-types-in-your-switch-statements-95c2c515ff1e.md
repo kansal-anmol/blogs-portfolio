@@ -5,7 +5,7 @@ brief: "TypeScript’s type inference system is incredibly powerful — but 
 coverImage: "/assets/blog/covers/why-typescript-fails-to-infer-types-in-your-switch-statements-95c2c515ff1e.png"
 publishedAt: "2025-04-18T19:11:03.270Z"
 readTimeInMinutes: 3
-tags: ["typescript","typescript-tutorial"]
+tags: ["TypeScript"]
 ---
 
 TypeScript’s type inference system is incredibly powerful — but it also has strict rules designed to keep your code predictable and safe. Sometimes, those rules can feel overly cautious. A common example? **Using a switch statement with discriminated unions and still getting a type error.**

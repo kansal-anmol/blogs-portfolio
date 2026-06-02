@@ -5,7 +5,7 @@ brief: "JavaScript’s Promise.race method is a powerful built-in utility that a
 coverImage: "/assets/blog/covers/implementing-a-polyfill-for-promiserace-in-javascript.png"
 publishedAt: "2025-01-10T18:30:00.000Z"
 readTimeInMinutes: 2
-tags: ["javascript","javascript-framework","javascript-promises"]
+tags: ["JavaScript"]
 ---
 
 JavaScript’s `Promise.race` method is a powerful built-in utility that allows developers to handle multiple promises simultaneously, resolving or rejecting as soon as the first promise in the iterable settles.

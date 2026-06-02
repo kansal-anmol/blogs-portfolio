@@ -5,7 +5,7 @@ brief: "When working with promises in JavaScript, you might run into scenarios w
 coverImage: "/assets/blog/covers/how-to-timeout-a-javascript-promise-with-code-examples.png"
 publishedAt: "2025-03-13T18:49:23.155Z"
 readTimeInMinutes: 2
-tags: ["javascript","frontend-development","javascript-framework","javascript-promises"]
+tags: ["JavaScript"]
 ---
 
 When working with promises in JavaScript, you might run into scenarios where a promise hangs indefinitely. Maybe it's an API call that never resolves or a process that takes too long. In such cases, setting a timeout can save your app from freezing. Let’s see how to implement this!

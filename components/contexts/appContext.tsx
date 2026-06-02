@@ -1,11 +1,10 @@
 import React, { createContext, useContext } from 'react';
-import { Post, Publication, Series, StaticPage } from '../../lib/types';
+import { Post, Publication, StaticPage } from '../../lib/types';
 
 type AppContext = {
 	publication: Publication;
 	post: Post | null;
 	page: StaticPage | null;
-	series: Series | null;
 };
 
 const AppContext = createContext<AppContext | null>(null);
@@ -15,13 +14,11 @@ const AppProvider = ({
 	publication,
 	post,
 	page,
-	series,
 }: {
 	children: React.ReactNode;
 	publication: Publication;
 	post?: Post | null;
 	page?: StaticPage | null;
-	series?: Series | null;
 }) => {
 	return (
 		<AppContext.Provider
@@ -29,7 +26,6 @@ const AppProvider = ({
 				publication,
 				post: post ?? null,
 				page: page ?? null,
-				series: series ?? null,
 			}}
 		>
 			{children}

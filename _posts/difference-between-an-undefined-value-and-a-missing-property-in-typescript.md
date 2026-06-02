@@ -5,10 +5,12 @@ brief: "There is one serious issue with the default behavior of the typescript c
 coverImage: "/assets/blog/covers/difference-between-an-undefined-value-and-a-missing-property-in-typescript.png"
 publishedAt: "2023-01-30T20:00:44.507Z"
 readTimeInMinutes: 2
-tags: ["typescript","reactjs","ts","typescript-tutorial","advance-typescript"]
+tags: ["TypeScript","React"]
 ---
 
 There is one serious issue with the default behavior of the typescript compiler w.r.t optional types.
+
+### 🧠 Understanding Optional Properties
 
 To properly understand the difference between an `undefined` value and a missing `property`, let's take an example -
 
@@ -33,7 +35,9 @@ Here, we are expecting an optional prop `src`.
 
 If `src` is not passed, we are rendering the default profile picture -
 
-![Default Profile Picture](https://cdn.hashnode.com/res/hashnode/image/upload/v1675104431571/22f51e41-1e1b-4a60-999e-934551646053.png align="left")
+![Default Profile Picture](/assets/blog/difference-between-an-undefined-value-and-a-missing-property-in-typescript/default-profile-pic.png align="left")
+
+### 💡 The Two Intended Cases
 
 Whenever we make any `property` optional (here `src` prop), we want to imply the following two cases -
 
@@ -53,6 +57,8 @@ Whenever we make any `property` optional (here `src` prop), we want to imply the
     ```
     
 
+### ⚡ The Problem: Silent Failures with Undefined
+
 However, TypeScript, by default, doesn't differentiate between `undefined` value and a missing `property`.
 
 This means that it won't complain even if we accidentally passed an `undefined` value to `src`\-
@@ -64,7 +70,9 @@ This means that it won't complain even if we accidentally passed an `undefined` 
 
 This will override our default value of `src` which will, in turn, break our application -
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1675105553230/9a9b0827-b1ab-485f-8f85-f357564423ac.png align="left")
+![](/assets/blog/difference-between-an-undefined-value-and-a-missing-property-in-typescript/broken-application.png align="left")
+
+### 🚀 The Fix: exactOptionalPropertyTypes
 
 To prevent such issues, TypeScript 4.4 introduced a new flag [`exactOptionalPropertyTypes`](https://devblogs.microsoft.com/typescript/announcing-typescript-4-4-beta/#exact-optional-property-types) which specifies that optional property types should be interpreted exactly as written, meaning that `| undefined` is not added to the type.
 

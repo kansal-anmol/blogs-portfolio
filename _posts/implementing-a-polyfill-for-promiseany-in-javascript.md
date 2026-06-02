@@ -5,7 +5,7 @@ brief: "Promise.any is a useful method in JavaScript that takes an array of prom
 coverImage: "/assets/blog/covers/implementing-a-polyfill-for-promiseany-in-javascript.png"
 publishedAt: "2025-02-28T18:30:00.000Z"
 readTimeInMinutes: 2
-tags: ["javascript","javascript-framework","javascript-promises","interview-questions"]
+tags: ["JavaScript"]
 ---
 
 `Promise.any` is a useful method in JavaScript that takes an array of promises and resolves as soon as **any one** of them fulfills. If all promises reject, it returns an `AggregateError`.
