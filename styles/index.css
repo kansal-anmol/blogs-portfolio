@@ -1,168 +1,41 @@
-@import "tailwindcss";
-@config "../tailwind.config.js";
-@plugin "@tailwindcss/typography";
-
-.hashnode-content-style {
-	@apply prose lg:prose-xl dark:prose-invert break-words text-slate-950 dark:text-neutral-50;
-}
-
-.hashnode-content-style p,
-.hashnode-content-style blockquote,
-.hashnode-content-style a,
-.hashnode-content-style figure,
-.hashnode-content-style figcaption,
-.hashnode-content-style pre,
-.hashnode-content-style li,
-.hashnode-content-style ul,
-.hashnode-content-style ol,
-.hashnode-content-style th,
-.hashnode-content-style td {
-	@apply leading-snug;
-}
-
-.hashnode-content-style p:first-child,
-.hashnode-content-style h1:first-child,
-.hashnode-content-style h2:first-child,
-.hashnode-content-style h3:first-child,
-.hashnode-content-style h4:first-child,
-.hashnode-content-style h5:first-child {
-	@apply mt-0;
-}
-
-.hashnode-content-style img {
-	@apply max-w-full;
-}
-
-.hashnode-content-style a {
-	@apply underline;
-}
-
-.hashnode-content-style a:hover {
-	@apply bg-primary-50;
-}
-
-.dark .hashnode-content-style a:hover {
-	@apply text-primary-500 bg-neutral-800;
-}
-
-.dark .hashnode-content-style pre {
-	@apply bg-neutral-900;
-}
-
-/* Override to remove the backtick */
-.hashnode-content-style :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::before, .hashnode-content-style :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::after  {
-    content: none;
-}
+@import 'tailwindcss';
+@config '../tailwind.config.js';
+@plugin '@tailwindcss/typography';
 
 .prose code {
-    border-radius: 0.25rem;
-    font-weight: 400 !important;
-    padding: 0.25rem;
-    --tw-text-opacity: 1;
-    color: rgba(0, 0, 0, var(--tw-text-opacity));
-    font-size: 80%;
-    background: #f0efed;
+	border-radius: 0.25rem;
+	font-weight: 400 !important;
+	padding: 0.25rem;
+	--tw-text-opacity: 1;
+	color: rgba(0, 0, 0, var(--tw-text-opacity));
+	font-size: 80%;
+	background: #f0efed;
 }
-  
+
 .dark .prose code {
-    --tw-bg-opacity: 1;
-    background-color: rgba(36, 41, 46, var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgba(238, 238, 238, var(--tw-text-opacity));
+	--tw-bg-opacity: 1;
+	background-color: rgba(36, 41, 46, var(--tw-bg-opacity));
+	--tw-text-opacity: 1;
+	color: rgba(238, 238, 238, var(--tw-text-opacity));
 }
-  
+
 .prose pre {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
+	padding-top: 2rem !important;
+	padding-bottom: 2rem !important;
 }
-  
+
 .prose pre code {
-    background-color: transparent;
-    border-radius: 0px;
-    font-weight: 500 !important;
-    padding: 0px;
-    font-size: 100%;
-    color: #fafafa;
+	background-color: transparent;
+	border-radius: 0px;
+	font-weight: 500 !important;
+	padding: 0px;
+	font-size: 100%;
+	color: #fafafa;
 }
 
 .dark .prose pre code {
-    background-color: transparent;
-    color: #ddd;
-}
-
-.gallery-item.image-gallery {
-	@apply w-[inherit] h-[inherit];
-}
-
-.gallery-item
-	:is(
-		.image-gallery-content,
-		.image-gallery-slide-wrapper,
-		.image-gallery-swipe,
-		.image-gallery-slides,
-		.image-gallery-slide,
-		.image-gallery-slide img
-	) {
-	@apply w-[inherit] h-[inherit];
-}
-
-.gallery-item .image-gallery-slide {
-	@apply cursor-default;
-}
-
-.gallery-item .image-gallery-slide img {
-	@apply h-[inherit] w-[inherit] object-cover;
-}
-
-.gallery-item :is(.image-gallery-left-nav, .image-gallery-right-nav) {
-	@apply top-0 bottom-0 transform-none px-0 opacity-10 transition-opacity;
-}
-
-.gallery-item .image-gallery-svg {
-	@apply !h-16;
-}
-
-.gallery-item .image-gallery-fullscreen-button {
-	@apply absolute top-0 bottom-0 left-[60px] w-[calc(100%-120px)] p-5 flex-center opacity-0 transition-opacity;
-}
-
-.gallery-item .image-gallery-fullscreen-button .image-gallery-svg {
-	@apply !h-8 !w-8;
-}
-
-.gallery-item:hover .image-gallery-fullscreen-button {
-	@apply opacity-100 cursor-zoom-in;
-}
-
-.gallery-item .image-gallery-right-nav:hover,
-.gallery-item .image-gallery-left-nav:hover {
-	@apply opacity-100;
-}
-
-.gallery-item .image-gallery-icon:focus {
-	@apply opacity-100;
-}
-
-.image-gallery-content.fullscreen .image-gallery-fullscreen-button {
-	@apply hidden;
-}
-
-.image-gallery-content.fullscreen .image-gallery-slide img {
-	@apply object-contain;
-}
-
-#projects .image-gallery-index {
-	@apply hidden;
-}
-
-.icon-link-btn {
-    @apply flex-center gap-2.5 px-2 p-1 rounded transition-colors hover:bg-badge-light dark:hover:bg-badge-dark;
-}
-.icon-link-btn--outline {
-    @apply border border-badge-dark;
-}
-.icon-link-btn--active {
-    @apply bg-badge-light dark:bg-badge-dark;
+	background-color: transparent;
+	color: #ddd;
 }
 
 /* Custom Fonts & Scrollbar utility */
@@ -184,22 +57,22 @@
 
 /* Custom dark prose theme overrides */
 .prose-custom {
-  --tw-prose-body: #d1d1d1;
-  --tw-prose-headings: #ffffff;
-  --tw-prose-lead: #a3a3a3;
-  --tw-prose-links: #b5f542;
-  --tw-prose-bold: #ffffff;
-  --tw-prose-counters: #666;
-  --tw-prose-bullets: #444;
-  --tw-prose-hr: #222222;
-  --tw-prose-quotes: #d1d1d1;
-  --tw-prose-quote-borders: #b5f542;
-  --tw-prose-captions: #666;
-  --tw-prose-code: #b5f542;
-  --tw-prose-pre-code: #d1d1d1;
-  --tw-prose-pre-bg: #111111;
-  --tw-prose-th-borders: #333;
-  --tw-prose-td-borders: #222;
+	--tw-prose-body: #d1d1d1;
+	--tw-prose-headings: #ffffff;
+	--tw-prose-lead: #a3a3a3;
+	--tw-prose-links: #b5f542;
+	--tw-prose-bold: #ffffff;
+	--tw-prose-counters: #666;
+	--tw-prose-bullets: #444;
+	--tw-prose-hr: #222222;
+	--tw-prose-quotes: #d1d1d1;
+	--tw-prose-quote-borders: #b5f542;
+	--tw-prose-captions: #666;
+	--tw-prose-code: #b5f542;
+	--tw-prose-pre-code: #d1d1d1;
+	--tw-prose-pre-bg: #111111;
+	--tw-prose-th-borders: #333;
+	--tw-prose-td-borders: #222;
 }
 
 html {
@@ -207,16 +80,32 @@ html {
 }
 
 [data-callout] {
-  display: flex;
-  gap: 12px;
-  padding: 14px 16px;
-  border-radius: 8px;
-  margin: 1.5rem 0;
-  font-size: 0.95rem;
-  border-left-width: 3px;
-  font-family: var(--font-sans), sans-serif;
+	display: flex;
+	gap: 12px;
+	padding: 14px 16px;
+	border-radius: 8px;
+	margin: 1.5rem 0;
+	font-size: 0.95rem;
+	border-left-width: 3px;
+	font-family: var(--font-sans), sans-serif;
 }
-[data-callout="tip"]     { background: #0f1f06; border-color: #b5f542; color: #c8e89a; }
-[data-callout="info"]    { background: #051525; border-color: #3b82f6; color: #93c5fd; }
-[data-callout="warning"] { background: #1f1200; border-color: #f59e0b; color: #fcd34d; }
-[data-callout="danger"]  { background: #1f0505; border-color: #ef4444; color: #fca5a5; }
+[data-callout='tip'] {
+	background: #0f1f06;
+	border-color: #b5f542;
+	color: #c8e89a;
+}
+[data-callout='info'] {
+	background: #051525;
+	border-color: #3b82f6;
+	color: #93c5fd;
+}
+[data-callout='warning'] {
+	background: #1f1200;
+	border-color: #f59e0b;
+	color: #fcd34d;
+}
+[data-callout='danger'] {
+	background: #1f0505;
+	border-color: #ef4444;
+	color: #fca5a5;
+}

@@ -94,7 +94,7 @@ async function getPostFromMDFile(fileName: string): Promise<LocalPost> {
 	};
 }
 
-export async function getAllPosts(): Promise<Post[]> {
+export async function getAllBlogs(): Promise<Post[]> {
 	if (!fs.existsSync(POSTS_DIRECTORY)) {
 		return [];
 	}
