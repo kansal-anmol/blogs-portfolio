@@ -1,7 +1,7 @@
+import type { UserExperience } from '@/src/shared/types';
 import React from 'react';
 import { FaCode } from 'react-icons/fa';
 import { IoCalendarOutline, IoLocationOutline } from 'react-icons/io5';
-import type { UserExperience } from '@/src/shared/types';
 
 interface ExperienceCardProps {
 	experience: UserExperience;
@@ -25,9 +25,7 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) =>
 						)}
 					</div>
 					<div>
-						<h4 className="font-heading text-md font-extrabold text-white">
-							{experience.company}
-						</h4>
+						<h4 className="font-heading text-md font-extrabold text-white">{experience.company}</h4>
 						<p className="font-heading text-xs font-semibold tracking-wider text-[#b5f542] uppercase">
 							{experience.role}
 						</p>

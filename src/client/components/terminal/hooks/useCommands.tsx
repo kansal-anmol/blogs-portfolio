@@ -1,5 +1,8 @@
 import React, { useMemo } from 'react';
 
+// Constants
+import { HOST_NAME } from '@/src/shared/constants';
+
 // Types
 import type { Command } from '../types';
 
@@ -11,7 +14,7 @@ export const useCommands = (initialCommands: Command[]): Command[] =>
 			helpText: 'Lists all available shell commands',
 			renderOutput: () => (
 				<div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-					<div>anmolkansal.in shell, version 1.0.0-release</div>
+					<div>{HOST_NAME} shell, version 1.0.0-release</div>
 					<div>These shell commands are defined internally. Type 'help' to see this list.</div>
 					<div
 						style={{

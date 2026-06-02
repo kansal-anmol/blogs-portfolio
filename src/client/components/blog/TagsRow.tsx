@@ -1,4 +1,4 @@
-import type { PostTag } from '@/lib/types';
+import type { PostTag } from '@/src/shared/types';
 
 type Props = {
 	tags?: PostTag[];

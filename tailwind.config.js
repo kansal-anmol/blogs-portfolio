@@ -8,23 +8,23 @@ module.exports = {
 		extend: {
 			colors: {
 				brand: {
-					light: "#FBF8F3",
-					dark: "#232332",
-					purple: "#7928CA",
-					pink: "#FF0080"
+					light: '#FBF8F3',
+					dark: '#232332',
+					purple: '#7928CA',
+					pink: '#FF0080',
 				},
 				blue: {
-					lighter: "#71c5ee",
-					light: "#3182ce",
-					normal: "#025091"
+					lighter: '#71c5ee',
+					light: '#3182ce',
+					normal: '#025091',
 				},
 				card: {
-					dark: "rgba(255, 255, 255, 0.04)",
-					light: "rgba(255, 255, 255, 0.80)"
+					dark: 'rgba(255, 255, 255, 0.04)',
+					light: 'rgba(255, 255, 255, 0.80)',
 				},
 				badge: {
-					dark: "rgba(226, 232, 240, 0.16)",
-					light: "#F8F0E3"
+					dark: 'rgba(226, 232, 240, 0.16)',
+					light: '#F8F0E3',
 				},
 				'accent-1': '#FAFAFA',
 				'accent-2': '#EAEAEA',
@@ -43,7 +43,7 @@ module.exports = {
 						maxWidth: 'none',
 
 						// Headings
-						'h1': {
+						h1: {
 							fontFamily: 'var(--font-sans)',
 							fontSize: '2.25rem',
 							fontWeight: '600',
@@ -53,7 +53,7 @@ module.exports = {
 							marginBottom: '1.5rem',
 							letterSpacing: '-0.02em',
 						},
-						'h2': {
+						h2: {
 							fontFamily: 'var(--font-sans)',
 							fontSize: '1.6rem',
 							fontWeight: '600',
@@ -65,7 +65,7 @@ module.exports = {
 							paddingBottom: '0.5rem',
 							borderBottom: '1px solid #222222',
 						},
-						'h3': {
+						h3: {
 							fontFamily: 'var(--font-sans)',
 							fontSize: '1.25rem',
 							fontWeight: '600',
@@ -74,7 +74,7 @@ module.exports = {
 							marginTop: '2rem',
 							marginBottom: '0.75rem',
 						},
-						'h4': {
+						h4: {
 							fontFamily: 'var(--font-sans)',
 							fontSize: '1.1rem',
 							fontWeight: '500',
@@ -90,7 +90,7 @@ module.exports = {
 						},
 
 						// Paragraph
-						'p': {
+						p: {
 							fontSize: '1.125rem',
 							lineHeight: '1.85',
 							marginTop: '0',
@@ -99,7 +99,7 @@ module.exports = {
 						},
 
 						// Links
-						'a': {
+						a: {
 							color: '#b5f542',
 							textDecoration: 'underline',
 							textDecorationColor: '#b5f54240',
@@ -113,17 +113,17 @@ module.exports = {
 						},
 
 						// Strong & emphasis
-						'strong': {
+						strong: {
 							color: '#ffffff',
 							fontWeight: '600',
 						},
-						'em': {
+						em: {
 							color: '#d4d4d4',
 							fontStyle: 'italic',
 						},
 
 						// Blockquote
-						'blockquote': {
+						blockquote: {
 							borderLeftWidth: '3px',
 							borderLeftColor: '#b5f542',
 							backgroundColor: '#111111',
@@ -143,7 +143,7 @@ module.exports = {
 						},
 
 						// Unordered list
-						'ul': {
+						ul: {
 							paddingLeft: '1.5rem',
 							marginBottom: '1.5rem',
 							listStyleType: 'none',
@@ -164,7 +164,7 @@ module.exports = {
 						},
 
 						// Ordered list
-						'ol': {
+						ol: {
 							paddingLeft: '1.5rem',
 							marginBottom: '1.5rem',
 							counterReset: 'list-counter',
@@ -222,7 +222,7 @@ module.exports = {
 							borderBottom: '1px solid #1e1e1e',
 							padding: '8px 16px',
 						},
-						'pre': {
+						pre: {
 							margin: '0',
 							padding: '1.25rem 1.5rem',
 							backgroundColor: 'transparent',
@@ -249,7 +249,7 @@ module.exports = {
 						},
 
 						// Horizontal rule
-						'hr': {
+						hr: {
 							borderColor: '#222222',
 							borderTopWidth: '1px',
 							marginTop: '2.5rem',
@@ -257,7 +257,7 @@ module.exports = {
 						},
 
 						// Tables
-						'table': {
+						table: {
 							width: '100%',
 							fontSize: '0.9rem',
 							marginBottom: '1.75rem',
@@ -265,10 +265,10 @@ module.exports = {
 							display: 'block',
 							overflowX: 'auto',
 						},
-						'thead': {
+						thead: {
 							borderBottom: '2px solid #333333',
 						},
-						'th': {
+						th: {
 							fontFamily: 'var(--font-sans)',
 							fontWeight: '600',
 							fontSize: '0.8rem',
@@ -279,7 +279,7 @@ module.exports = {
 							textAlign: 'left',
 							backgroundColor: '#111111',
 						},
-						'td': {
+						td: {
 							padding: '10px 16px',
 							borderBottom: '1px solid #1e1e1e',
 							color: '#d4d4d4',
@@ -290,17 +290,17 @@ module.exports = {
 						},
 
 						// Images
-						'img': {
+						img: {
 							borderRadius: '8px',
 							border: '1px solid #222222',
 							marginTop: '1.5rem',
 							marginBottom: '0.5rem',
 							width: '100%',
 						},
-						'figure': {
+						figure: {
 							margin: '2rem 0',
 						},
-						'figcaption': {
+						figcaption: {
 							textAlign: 'center',
 							fontSize: '0.8rem',
 							color: '#666666',
@@ -309,7 +309,7 @@ module.exports = {
 						},
 
 						// Keyboard input element
-						'kbd': {
+						kbd: {
 							fontFamily: 'var(--font-mono)',
 							fontSize: '0.8em',
 							color: '#d4d4d4',
@@ -321,14 +321,14 @@ module.exports = {
 						},
 
 						// Definition / abbreviation
-						'abbr': {
+						abbr: {
 							textDecoration: 'underline dotted',
 							textDecorationColor: '#555555',
 							cursor: 'help',
 						},
 
 						// Mark / highlight
-						'mark': {
+						mark: {
 							backgroundColor: '#b5f54230',
 							color: '#b5f542',
 							padding: '0.1em 0.25em',
@@ -363,14 +363,15 @@ module.exports = {
 		},
 	},
 	plugins: [
-		require('@tailwindcss/typography'), 
+		require('@tailwindcss/typography'),
 		function ({ addUtilities }) {
 			addUtilities({
-				".flex-center": {
-					display: "flex",
-					"align-items": "center",
-					"justify-content": "center"
-				}
+				'.flex-center': {
+					display: 'flex',
+					'align-items': 'center',
+					'justify-content': 'center',
+				},
 			});
-	}],
+		},
+	],
 };

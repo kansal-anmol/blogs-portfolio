@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
 import { Post as Blog } from '@/src/shared/types';
+import { useEffect, useMemo, useState } from 'react';
 
 export const useFilteredBlogs = (blogs: Blog[]) => {
 	const [search, setSearch] = useState('');

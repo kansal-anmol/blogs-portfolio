@@ -1,71 +1,30 @@
 import { GetStaticProps } from 'next';
-import Head from 'next/head';
 
 import { GrScorecard } from 'react-icons/gr';
 import { IoCalendarOutline } from 'react-icons/io5';
 
-import { SKILL_VS_ICON } from '@/src/client/constants/skill';
-import { SOCIALS } from '@/src/client/constants/social';
 import { ExperienceCard } from '@/src/client/components/ExperienceCard';
+import { PageMetadata } from '@/src/client/components/PageMetadata';
 import { ProjectCard } from '@/src/client/components/ProjectCard';
-import { PUBLICATION } from '@/src/shared/constants/publication';
-import { USER } from '@/src/shared/constants/user';
+import { SKILL_VS_ICON } from '@/src/client/constants/skill';
+import { SOCIAL_ICONS } from '@/src/client/constants/social';
+import { getUserData } from '@/src/server';
+import { User } from '@/src/shared/types';
 
-type Props = {};
-
-// Next.js Metadata configuration object (Next.js App Router style equivalent / compliance export)
-export const metadata = {
-	title: 'About — Anmol Kansal',
-	description:
-		'Learn more about Anmol Kansal, a Senior Frontend Engineer @ D.E. Shaw specializing in React, TypeScript, and state-of-the-art UI/UX architectures.',
-	openGraph: {
-		title: 'About — Anmol Kansal',
-		description:
-			'Learn more about Anmol Kansal, a Senior Frontend Engineer @ D.E. Shaw specializing in React, TypeScript, and state-of-the-art UI/UX architectures.',
-		type: 'profile',
-		url: 'https://www.anmolkansal.in/about',
-		images: [
-			{
-				url: '/assets/profile.jpg',
-				width: 800,
-				height: 800,
-				alt: 'Anmol Kansal',
-			},
-		],
-	},
-	twitter: {
-		card: 'summary_large_image',
-		title: 'About — Anmol Kansal',
-		description:
-			'Learn more about Anmol Kansal, a Senior Frontend Engineer @ D.E. Shaw specializing in React, TypeScript, and state-of-the-art UI/UX architectures.',
-		images: ['/assets/profile.jpg'],
-	},
+type Props = {
+	user: User;
 };
 
-export default function About({}: Props) {
-	const { experiences, projects, skillGroups, achievements, education } = USER;
+export default function About({ user }: Props) {
+	const { experiences, projects, skillGroups, achievements, education } = user;
+
+	const activeSocials = (user.socials || [])
+		.filter((s) => SOCIAL_ICONS[s.name])
+		.map((s) => ({ name: s.name, href: s.url, icon: SOCIAL_ICONS[s.name] }));
 
 	return (
 		<>
-			<Head>
-				{/* Primary Metadata */}
-				<title>{metadata.title}</title>
-				<meta name="description" content={metadata.description} />
-
-				{/* Open Graph / Facebook */}
-				<meta property="og:type" content={metadata.openGraph.type} />
-				<meta property="og:url" content={metadata.openGraph.url} />
-				<meta property="og:title" content={metadata.openGraph.title} />
-				<meta property="og:description" content={metadata.openGraph.description} />
-				<meta property="og:image" content={metadata.openGraph.images[0].url} />
-
-				{/* Twitter */}
-				<meta property="twitter:card" content={metadata.twitter.card} />
-				<meta property="twitter:url" content={metadata.openGraph.url} />
-				<meta property="twitter:title" content={metadata.twitter.title} />
-				<meta property="twitter:description" content={metadata.twitter.description} />
-				<meta property="twitter:image" content={metadata.twitter.images[0]} />
-			</Head>
+			<PageMetadata user={user} title="About" urlPath="/about" ogType="profile" />
 
 			{/* About Page Outer Container in Dark Mode */}
 			<div className="dark font-body bg-[#0a0a0a] text-neutral-100 selection:bg-[#b5f542]/20 selection:text-[#b5f542]">
@@ -75,26 +34,26 @@ export default function About({}: Props) {
 					<section className="flex flex-col items-center gap-6 text-center">
 						<div className="relative h-[120px] w-[120px] overflow-hidden rounded-full border-2 border-[#222222] shadow-lg">
 							<img
-								src={PUBLICATION.author.profilePicture || '/assets/profile.jpg'}
+								src="/assets/profile.png"
 								alt="Anmol Kansal"
 								className="h-full w-full object-cover"
 							/>
 						</div>
 						<div className="flex flex-col gap-2">
 							<h1 className="font-heading text-4xl font-black text-white sm:text-5xl">
-								{USER.name}
+								{user.name}
 							</h1>
 							<h2 className="font-heading text-lg font-bold tracking-wide text-[#b5f542] uppercase">
-								{USER.role} @ {USER.company}
+								{user.role}
 							</h2>
 						</div>
 						<p className="font-body max-w-2xl text-base leading-relaxed text-neutral-300 sm:text-lg">
-							{USER.bio}
+							{user.bio}
 						</p>
 
 						{/* Social Links Row */}
 						<div className="mt-2 flex items-center gap-3">
-							{SOCIALS.map(({ name, href, icon: Icon }) => (
+							{activeSocials.map(({ name, href, icon: Icon }) => (
 								<a
 									key={name}
 									href={href}
@@ -156,24 +115,24 @@ export default function About({}: Props) {
 						</div>
 					</section>
 
-					{/* Skills Section */}
-					<section className="flex flex-col gap-8">
+					{/* Skills Column */}
+					<div className="flex flex-col gap-8">
 						<h3 className="font-heading border-b border-[#222222] pb-3 text-2xl font-black text-white">
-							Skills & Capabilities
+							Skills
 						</h3>
 
 						<div className="flex flex-col gap-6">
-							{skillGroups.map((group, gIdx) => (
-								<div key={gIdx} className="flex flex-col gap-3">
-									<h4 className="font-heading text-sm font-bold tracking-wider text-neutral-400 uppercase">
+							{skillGroups.map((group) => (
+								<div key={group.category} className="flex flex-col gap-3">
+									<h4 className="font-heading text-sm font-bold tracking-wider text-neutral-500 uppercase">
 										{group.category}
 									</h4>
 									<div className="flex flex-wrap gap-2.5">
-										{group.skills.map((skill, sIdx) => {
+										{group.skills.map((skill) => {
 											const Icon = SKILL_VS_ICON[skill];
 											return (
 												<div
-													key={sIdx}
+													key={skill}
 													className="group flex cursor-default items-center gap-2 rounded-xl border border-[#222222] bg-[#111111] px-4 py-2.5 text-neutral-200 transition-all duration-300 hover:border-[#b5f542] hover:text-[#b5f542]"
 												>
 													{Icon && (
@@ -189,12 +148,12 @@ export default function About({}: Props) {
 								</div>
 							))}
 						</div>
-					</section>
+					</div>
 
-					{/* Education & Achievements Section */}
+					{/* Education & Achievements Column */}
 					<section className="flex flex-col gap-8">
 						<h3 className="font-heading border-b border-[#222222] pb-3 text-2xl font-black text-white">
-							Education & Highlights
+							Education
 						</h3>
 
 						<div className="flex flex-col gap-6">
@@ -247,8 +206,11 @@ export default function About({}: Props) {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
+	const user = getUserData();
 	return {
-		props: {},
+		props: {
+			user,
+		},
 		revalidate: 60,
 	};
 };

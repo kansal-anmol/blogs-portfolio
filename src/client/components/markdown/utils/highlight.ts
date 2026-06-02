@@ -1,3 +1,4 @@
+// @ts-nocheck
 /*
   Highlight.js 10.2.0 (da7d149b)
   License: BSD-3-Clause
@@ -22,7 +23,7 @@ var hljs = (function () {
 	}
 	class n {
 		constructor(e) {
-			void 0 === e.data && (e.data = {}), (this.data = e.data);
+			(void 0 === e.data && (e.data = {}), (this.data = e.data));
 		}
 		ignoreMatch() {
 			this.ignore = !0;
@@ -61,9 +62,9 @@ var hljs = (function () {
 						3 === i.nodeType
 							? (r += i.nodeValue.length)
 							: 1 === i.nodeType &&
-							  (n.push({ event: 'start', offset: r, node: i }),
-							  (r = e(i, r)),
-							  a(i).match(/br|hr|img|input/) || n.push({ event: 'stop', offset: r, node: i }));
+								(n.push({ event: 'start', offset: r, node: i }),
+								(r = e(i, r)),
+								a(i).match(/br|hr|img|input/) || n.push({ event: 'stop', offset: r, node: i }));
 					return r;
 				})(e, 0),
 				n
@@ -80,11 +81,11 @@ var hljs = (function () {
 							? e
 							: n
 						: 'start' === n[0].event
-						? e
-						: n
+							? e
+							: n
 					: e.length
-					? e
-					: n;
+						? e
+						: n;
 			}
 			function c(e) {
 				s +=
@@ -108,10 +109,10 @@ var hljs = (function () {
 				if (((s += t(r.substring(i, d[0].offset))), (i = d[0].offset), d === e)) {
 					o.reverse().forEach(u);
 					do {
-						g(d.splice(0, 1)[0]), (d = l());
+						(g(d.splice(0, 1)[0]), (d = l()));
 					} while (d === e && d.length && d[0].offset === i);
 					o.reverse().forEach(c);
-				} else 'start' === d[0].event ? o.push(d[0].node) : o.pop(), g(d.splice(0, 1)[0]);
+				} else ('start' === d[0].event ? o.push(d[0].node) : o.pop(), g(d.splice(0, 1)[0]));
 			}
 			return s + t(r.substr(i));
 		},
@@ -120,7 +121,7 @@ var hljs = (function () {
 		o = (e) => !!e.kind;
 	class l {
 		constructor(e, n) {
-			(this.buffer = ''), (this.classPrefix = n.classPrefix), e.walk(this);
+			((this.buffer = ''), (this.classPrefix = n.classPrefix), e.walk(this));
 		}
 		addText(e) {
 			this.buffer += t(e);
@@ -128,7 +129,7 @@ var hljs = (function () {
 		openNode(e) {
 			if (!o(e)) return;
 			let n = e.kind;
-			e.sublanguage || (n = `${this.classPrefix}${n}`), this.span(n);
+			(e.sublanguage || (n = `${this.classPrefix}${n}`), this.span(n));
 		}
 		closeNode(e) {
 			o(e) && (this.buffer += s);
@@ -142,7 +143,7 @@ var hljs = (function () {
 	}
 	class c {
 		constructor() {
-			(this.rootNode = { children: [] }), (this.stack = [this.rootNode]);
+			((this.rootNode = { children: [] }), (this.stack = [this.rootNode]));
 		}
 		get top() {
 			return this.stack[this.stack.length - 1];
@@ -155,7 +156,7 @@ var hljs = (function () {
 		}
 		openNode(e) {
 			const n = { kind: e, children: [] };
-			this.add(n), this.stack.push(n);
+			(this.add(n), this.stack.push(n));
 		}
 		closeNode() {
 			if (this.stack.length > 1) return this.stack.pop();
@@ -174,7 +175,7 @@ var hljs = (function () {
 				'string' == typeof n
 					? e.addText(n)
 					: n.children &&
-					  (e.openNode(n), n.children.forEach((n) => this._walk(e, n)), e.closeNode(n)),
+						(e.openNode(n), n.children.forEach((n) => this._walk(e, n)), e.closeNode(n)),
 				e
 			);
 		}
@@ -185,12 +186,12 @@ var hljs = (function () {
 					? (e.children = [e.children.join('')])
 					: e.children.forEach((e) => {
 							c._collapse(e);
-					  }));
+						}));
 		}
 	}
 	class u extends c {
 		constructor(e) {
-			super(), (this.options = e);
+			(super(), (this.options = e));
 		}
 		addKeyword(e, n) {
 			'' !== e && (this.openNode(n), this.addText(e), this.closeNode());
@@ -200,7 +201,7 @@ var hljs = (function () {
 		}
 		addSublanguage(e, n) {
 			const t = e.root;
-			(t.kind = n), (t.sublanguage = !0), this.add(t);
+			((t.kind = n), (t.sublanguage = !0), this.add(t));
 		}
 		toHTML() {
 			return new l(this, this.options).value();
@@ -313,10 +314,10 @@ var hljs = (function () {
 		return n
 			? +n
 			: (function (e) {
-					return w.includes(e.toLowerCase());
-			  })(e)
-			? 0
-			: 1;
+						return w.includes(e.toLowerCase());
+				  })(e)
+				? 0
+				: 1;
 	}
 	const y = {
 			props: ['language', 'code', 'autodetect'],
@@ -339,7 +340,7 @@ var hljs = (function () {
 						this.autoDetect
 							? ((e = hljs.highlightAuto(this.code)), (this.detectedLanguage = e.language))
 							: ((e = hljs.highlight(this.language, this.code, this.ignoreIllegals)),
-							  (this.detectectLanguage = this.language)),
+								(this.detectectLanguage = this.language)),
 						e.value
 					);
 				},
@@ -389,7 +390,7 @@ var hljs = (function () {
 			var a = { code: n, language: e };
 			S('before:highlight', a);
 			var i = a.result ? a.result : b(a.language, a.code, t, r);
-			return (i.code = a.code), S('after:highlight', i), i;
+			return ((i.code = a.code), S('after:highlight', i), i);
 		}
 		function b(e, t, a, s) {
 			var o = t;
@@ -398,17 +399,17 @@ var hljs = (function () {
 				return Object.prototype.hasOwnProperty.call(e.keywords, t) && e.keywords[t];
 			}
 			function u() {
-				null != R.subLanguage
+				(null != R.subLanguage
 					? (function () {
 							if ('' !== L) {
 								var e = null;
 								if ('string' == typeof R.subLanguage) {
 									if (!i[R.subLanguage]) return void M.addText(L);
-									(e = b(R.subLanguage, L, !0, O[R.subLanguage])), (O[R.subLanguage] = e.top);
+									((e = b(R.subLanguage, L, !0, O[R.subLanguage])), (O[R.subLanguage] = e.top));
 								} else e = v(L, R.subLanguage.length ? R.subLanguage : null);
-								R.relevance > 0 && (j += e.relevance), M.addSublanguage(e.emitter, e.language);
+								(R.relevance > 0 && (j += e.relevance), M.addSublanguage(e.emitter, e.language));
 							}
-					  })()
+						})()
 					: (function () {
 							if (!R.keywords) return void M.addText(L);
 							let e = 0;
@@ -420,17 +421,18 @@ var hljs = (function () {
 								const r = c(R, n);
 								if (r) {
 									const [e, a] = r;
-									M.addText(t), (t = ''), (j += a), M.addKeyword(n[0], e);
+									(M.addText(t), (t = ''), (j += a), M.addKeyword(n[0], e));
 								} else t += n[0];
-								(e = R.keywordPatternRe.lastIndex), (n = R.keywordPatternRe.exec(L));
+								((e = R.keywordPatternRe.lastIndex), (n = R.keywordPatternRe.exec(L)));
 							}
-							(t += L.substr(e)), M.addText(t);
-					  })(),
-					(L = '');
+							((t += L.substr(e)), M.addText(t));
+						})(),
+					(L = ''));
 			}
 			function h(e) {
 				return (
-					e.className && M.openNode(e.className), (R = Object.create(e, { parent: { value: R } }))
+					e.className && M.openNode(e.className),
+					(R = Object.create(e, { parent: { value: R } }))
 				);
 			}
 			function p(e) {
@@ -439,7 +441,7 @@ var hljs = (function () {
 			var m = {};
 			function x(t, r) {
 				var i = r && r[0];
-				if (((L += t), null == i)) return u(), 0;
+				if (((L += t), null == i)) return (u(), 0);
 				if ('begin' === m.type && 'end' === r.type && m.index === r.index && '' === i) {
 					if (((L += o.slice(r.index, r.index + 1)), !l)) {
 						const n = Error('0 width match regex');
@@ -483,7 +485,7 @@ var hljs = (function () {
 								if (i) {
 									if (t['on:end']) {
 										const e = new n(t);
-										t['on:end'](r, e), e.ignore && (i = !1);
+										(t['on:end'](r, e), e.ignore && (i = !1));
 									}
 									if (i) {
 										for (; t.endsParent && t.parent; ) t = t.parent;
@@ -498,9 +500,9 @@ var hljs = (function () {
 							? (L += t)
 							: (i.returnEnd || i.excludeEnd || (L += t), u(), i.excludeEnd && (L = t));
 						do {
-							R.className && M.closeNode(),
+							(R.className && M.closeNode(),
 								R.skip || R.subLanguage || (j += R.relevance),
-								(R = R.parent);
+								(R = R.parent));
 						} while (R !== a.parent);
 						return (
 							a.starts && (a.endSameAsBegin && (a.starts.endRe = a.endRe), h(a.starts)),
@@ -512,7 +514,7 @@ var hljs = (function () {
 				if ('illegal' === r.type && '' === i) return 1;
 				if (S > 1e5 && S > 3 * r.index)
 					throw Error('potential infinite loop, way more iterations than matches');
-				return (L += i), i.length;
+				return ((L += i), i.length);
 			}
 			var E = y(e);
 			if (!E) throw (console.error(d.replace('{}', e)), Error('Unknown language: "' + e + '"'));
@@ -522,24 +524,24 @@ var hljs = (function () {
 					}
 					class t {
 						constructor() {
-							(this.matchIndexes = {}),
+							((this.matchIndexes = {}),
 								(this.regexes = []),
 								(this.matchAt = 1),
-								(this.position = 0);
+								(this.position = 0));
 						}
 						addRule(e, n) {
-							(n.position = this.position++),
+							((n.position = this.position++),
 								(this.matchIndexes[this.matchAt] = n),
 								this.regexes.push([n, e]),
 								(this.matchAt +=
 									(function (e) {
 										return RegExp(e.toString() + '|').exec('').length - 1;
-									})(e) + 1);
+									})(e) + 1));
 						}
 						compile() {
 							0 === this.regexes.length && (this.exec = () => null);
 							const e = this.regexes.map((e) => e[1]);
-							(this.matcherRe = n(
+							((this.matcherRe = n(
 								(function (e, n = '|') {
 									for (
 										var t = /\[(?:[^\\\]]|\\.)*\]|\(\??|\\([1-9][0-9]*)|\\./, r = 0, a = '', i = 0;
@@ -554,11 +556,11 @@ var hljs = (function () {
 												a += o;
 												break;
 											}
-											(a += o.substring(0, l.index)),
+											((a += o.substring(0, l.index)),
 												(o = o.substring(l.index + l[0].length)),
 												'\\' === l[0][0] && l[1]
 													? (a += '\\' + (+l[1] + s))
-													: ((a += l[0]), '(' === l[0] && r++);
+													: ((a += l[0]), '(' === l[0] && r++));
 										}
 										a += ')';
 									}
@@ -566,7 +568,7 @@ var hljs = (function () {
 								})(e),
 								!0,
 							)),
-								(this.lastIndex = 0);
+								(this.lastIndex = 0));
 						}
 						exec(e) {
 							this.matcherRe.lastIndex = this.lastIndex;
@@ -574,16 +576,16 @@ var hljs = (function () {
 							if (!n) return null;
 							const t = n.findIndex((e, n) => n > 0 && void 0 !== e),
 								r = this.matchIndexes[t];
-							return n.splice(0, t), Object.assign(n, r);
+							return (n.splice(0, t), Object.assign(n, r));
 						}
 					}
 					class a {
 						constructor() {
-							(this.rules = []),
+							((this.rules = []),
 								(this.multiRegexes = []),
 								(this.count = 0),
 								(this.lastIndex = 0),
-								(this.regexIndex = 0);
+								(this.regexIndex = 0));
 						}
 						getMatcher(e) {
 							if (this.multiRegexes[e]) return this.multiRegexes[e];
@@ -602,7 +604,7 @@ var hljs = (function () {
 							this.regexIndex = 0;
 						}
 						addRule(e, n) {
-							this.rules.push([e, n]), 'begin' === n.type && this.count++;
+							(this.rules.push([e, n]), 'begin' === n.type && this.count++);
 						}
 						exec(e) {
 							const n = this.getMatcher(this.regexIndex);
@@ -628,9 +630,9 @@ var hljs = (function () {
 					return (function t(s, o) {
 						const l = s;
 						if (s.compiled) return l;
-						(s.compiled = !0),
+						((s.compiled = !0),
 							(s.__beforeBegin = null),
-							(s.keywords = s.keywords || s.beginKeywords);
+							(s.keywords = s.keywords || s.beginKeywords));
 						let c = null;
 						if (
 							('object' == typeof s.keywords &&
@@ -643,15 +645,15 @@ var hljs = (function () {
 											? r('keyword', e)
 											: Object.keys(e).forEach(function (n) {
 													r(n, e[n]);
-											  }),
+												}),
 										t
 									);
 									function r(e, r) {
-										n && (r = r.toLowerCase()),
+										(n && (r = r.toLowerCase()),
 											r.split(' ').forEach(function (n) {
 												var r = n.split('|');
 												t[r[0]] = [e, N(r[0], r[1])];
-											});
+											}));
 									}
 								})(s.keywords, e.case_insensitive)),
 							s.lexemes && c)
@@ -689,12 +691,12 @@ var hljs = (function () {
 											e.cached_variants
 												? e.cached_variants
 												: (function e(n) {
-														return !!n && (n.endsWithParent || e(n.starts));
-												  })(e)
-												? r(e, { starts: e.starts ? r(e.starts) : null })
-												: Object.isFrozen(e)
-												? r(e)
-												: e
+															return !!n && (n.endsWithParent || e(n.starts));
+													  })(e)
+													? r(e, { starts: e.starts ? r(e.starts) : null })
+													: Object.isFrozen(e)
+														? r(e)
+														: e
 										);
 									})('self' === e ? s : e);
 								}),
@@ -731,10 +733,10 @@ var hljs = (function () {
 				I = !1;
 			try {
 				for (R.matcher.considerAll(); ; ) {
-					S++, I ? (I = !1) : ((R.matcher.lastIndex = A), R.matcher.considerAll());
+					(S++, I ? (I = !1) : ((R.matcher.lastIndex = A), R.matcher.considerAll()));
 					const e = R.matcher.exec(o);
 					if (!e && R.matcher.resumingScanAtSamePosition()) {
-						(L += o[A]), (A += 1);
+						((L += o[A]), (A += 1));
 						continue;
 					}
 					if (!e) break;
@@ -775,7 +777,7 @@ var hljs = (function () {
 			n = n || f.languages || Object.keys(i);
 			var t = (function (e) {
 					const n = { relevance: 0, emitter: new f.__emitter(f), value: k(e), illegal: !1, top: h };
-					return n.emitter.addText(e), n;
+					return (n.emitter.addText(e), n);
 				})(e),
 				r = t;
 			return (
@@ -784,9 +786,9 @@ var hljs = (function () {
 					.filter(A)
 					.forEach(function (n) {
 						var a = b(n, e, !1);
-						(a.language = n),
+						((a.language = n),
 							a.relevance > r.relevance && (r = a),
-							a.relevance > t.relevance && ((r = t), (t = a));
+							a.relevance > t.relevance && ((r = t), (t = a)));
 					}),
 				r.language && (t.second_best = r),
 				t
@@ -796,7 +798,7 @@ var hljs = (function () {
 			return f.tabReplace || f.useBR
 				? e.replace(c, (e) =>
 						'\n' === e ? (f.useBR ? '<br>' : e) : f.tabReplace ? e.replace(/\t/g, f.tabReplace) : e,
-				  )
+					)
 				: e;
 		}
 		function E(e) {
@@ -817,27 +819,29 @@ var hljs = (function () {
 				return n.split(/\s+/).find((e) => p(e) || y(e));
 			})(e);
 			if (p(t)) return;
-			S('before:highlightBlock', { block: e, language: t }),
+			(S('before:highlightBlock', { block: e, language: t }),
 				f.useBR
 					? ((n = document.createElement('div')).innerHTML = e.innerHTML
 							.replace(/\n/g, '')
 							.replace(/<br[ /]*>/g, '\n'))
-					: (n = e);
+					: (n = e));
 			const r = n.textContent,
 				a = t ? m(t, r, !0) : v(r),
 				i = M(n);
 			if (i.length) {
 				const e = document.createElement('div');
-				(e.innerHTML = a.value), (a.value = L(i, M(e), r));
+				((e.innerHTML = a.value), (a.value = L(i, M(e), r)));
 			}
-			(a.value = x(a.value)),
+			((a.value = x(a.value)),
 				S('after:highlightBlock', { block: e, result: a }),
 				(e.innerHTML = a.value),
 				(e.className = (function (e, n, t) {
 					var r = n ? s[n] : t,
 						a = [e.trim()];
 					return (
-						e.match(/\bhljs\b/) || a.push('hljs'), e.includes(r) || a.push(r), a.join(' ').trim()
+						e.match(/\bhljs\b/) || a.push('hljs'),
+						e.includes(r) || a.push(r),
+						a.join(' ').trim()
 					);
 				})(e.className, t, a.language)),
 				(e.result = { language: a.language, re: a.relevance, relavance: a.relevance }),
@@ -846,7 +850,7 @@ var hljs = (function () {
 						language: a.second_best.language,
 						re: a.second_best.relevance,
 						relavance: a.second_best.relevance,
-					});
+					}));
 		}
 		const w = () => {
 			if (!w.called) {
@@ -856,13 +860,13 @@ var hljs = (function () {
 			}
 		};
 		function y(e) {
-			return (e = (e || '').toLowerCase()), i[e] || i[s[e]];
+			return ((e = (e || '').toLowerCase()), i[e] || i[s[e]]);
 		}
 		function j(e, { languageName: n }) {
-			'string' == typeof e && (e = [e]),
+			('string' == typeof e && (e = [e]),
 				e.forEach((e) => {
 					s[e] = n;
-				});
+				}));
 		}
 		function A(e) {
 			var n = y(e);
@@ -874,7 +878,7 @@ var hljs = (function () {
 				e[t] && e[t](n);
 			});
 		}
-		Object.assign(t, {
+		(Object.assign(t, {
 			highlight: m,
 			highlightAuto: v,
 			fixMarkup: function (e) {
@@ -904,12 +908,12 @@ var hljs = (function () {
 						!l)
 					)
 						throw n;
-					console.error(n), (r = h);
+					(console.error(n), (r = h));
 				}
-				r.name || (r.name = e),
+				(r.name || (r.name = e),
 					(i[e] = r),
 					(r.rawDefinition = n.bind(null, t)),
-					r.aliases && j(r.aliases, { languageName: e });
+					r.aliases && j(r.aliases, { languageName: e }));
 			},
 			listLanguages: function () {
 				return Object.keys(i);
@@ -934,9 +938,9 @@ var hljs = (function () {
 			(t.safeMode = function () {
 				l = !0;
 			}),
-			(t.versionString = '10.2.0');
+			(t.versionString = '10.2.0'));
 		for (const n in _) 'object' == typeof _[n] && e(_[n]);
-		return Object.assign(t, _), t;
+		return (Object.assign(t, _), t);
 	})({});
 })();
 'object' == typeof exports && 'undefined' != typeof module && (module.exports = hljs);
@@ -1480,7 +1484,7 @@ hljs.registerLanguage(
 		'use strict';
 		return function (e) {
 			var n = e.requireLanguage('c-like').rawDefinition();
-			return (n.name = 'C'), (n.aliases = ['c', 'h']), n;
+			return ((n.name = 'C'), (n.aliases = ['c', 'h']), n);
 		};
 	})(),
 );
@@ -2202,7 +2206,7 @@ hljs.registerLanguage(
 						{ begin: /_(?!_)/, end: /_/, relevance: 0 },
 					],
 				};
-			i.contains.push(s), s.contains.push(i);
+			(i.contains.push(s), s.contains.push(i));
 			var c = [e, a];
 			return (
 				(i.contains = i.contains.concat(c)),
@@ -3057,7 +3061,7 @@ hljs.registerLanguage(
 						relevance: 0,
 					},
 				].concat(r);
-			(c.contains = d), (b.contains = d);
+			((c.contains = d), (b.contains = d));
 			var g = [
 				{ begin: /^\s*=>/, starts: { end: '$', contains: d } },
 				{
@@ -3120,7 +3124,7 @@ hljs.registerLanguage(
 					illegal: /\n/,
 					contains: [{ begin: '{{' }, { begin: '}}' }, { begin: '""' }, r],
 				});
-			(l.contains = [o, c, s, e.APOS_STRING_MODE, e.QUOTE_STRING_MODE, a, e.C_BLOCK_COMMENT_MODE]),
+			((l.contains = [o, c, s, e.APOS_STRING_MODE, e.QUOTE_STRING_MODE, a, e.C_BLOCK_COMMENT_MODE]),
 				(r.contains = [
 					g,
 					c,
@@ -3129,7 +3133,7 @@ hljs.registerLanguage(
 					e.QUOTE_STRING_MODE,
 					a,
 					e.inherit(e.C_BLOCK_COMMENT_MODE, { illegal: /\n/ }),
-				]);
+				]));
 			var d = { variants: [o, c, s, e.APOS_STRING_MODE, e.QUOTE_STRING_MODE] },
 				E = { begin: '<', end: '>', contains: [{ beginKeywords: 'in out' }, i] },
 				_ = e.IDENT_RE + '(<' + e.IDENT_RE + '(\\s*,\\s*' + e.IDENT_RE + ')*>)?(\\[\\])?',
@@ -5046,7 +5050,7 @@ hljs.registerLanguage(
 						contains: [{ className: 'attr', begin: /\S+/ }],
 					},
 				];
-			return (i.contains = s), { name: 'Nix', aliases: ['nixos'], keywords: n, contains: s };
+			return ((i.contains = s), { name: 'Nix', aliases: ['nixos'], keywords: n, contains: s });
 		};
 	})(),
 );
@@ -5359,7 +5363,7 @@ hljs.registerLanguage(
 				b,
 			];
 			var u = [i, s, g, t, e.QUOTE_STRING_MODE, c, d, o, l, b];
-			(t.contains[1].contains = u), (d.contains = u), (b.contains[1].contains = u);
+			((t.contains[1].contains = u), (d.contains = u), (b.contains[1].contains = u));
 			var E = { className: 'params', begin: '\\(', end: '\\)', contains: u };
 			return {
 				name: 'Erlang',
@@ -5524,7 +5528,7 @@ hljs.registerLanguage(
 						relevance: 0,
 					},
 				];
-			return (a.contains = t), { name: 'Elixir', keywords: i, contains: t };
+			return ((a.contains = t), { name: 'Elixir', keywords: i, contains: t });
 		};
 	})(),
 );

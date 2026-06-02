@@ -122,4 +122,3 @@ export function useTerminal(initialCommands: Command[]) {
 		executeCommand,
 	};
 }
-

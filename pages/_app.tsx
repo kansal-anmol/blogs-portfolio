@@ -4,10 +4,6 @@ import { JetBrains_Mono, Lora } from 'next/font/google';
 import Head from 'next/head';
 import { useEffect } from 'react';
 
-// Contexts
-import { AppProvider } from '@/src/client/contexts/appContext';
-import { PUBLICATION } from '@/src/shared/constants/publication';
-
 // Components
 import { PageFooter } from '@/src/client/components/PageFooter';
 import { PageNavbar } from '@/src/client/components/PageNavbar';
@@ -44,10 +40,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 	}, []);
 
 	return (
-		<AppProvider publication={PUBLICATION}>
+		<>
 			<Head>
-				<link rel="icon" type="image/jpeg" href="/assets/profile.jpg" />
-				<link rel="apple-touch-icon" href="/assets/profile.jpg" />
+				<link rel="icon" type="image/jpeg" href="/assets/profile.png" />
+				<link rel="apple-touch-icon" href="/assets/profile.png" />
 				<meta name="theme-color" content="#000000" />
 				<script dangerouslySetInnerHTML={{ __html: googleAnalytics }} />
 			</Head>
@@ -60,8 +56,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 					<Component {...pageProps} />
 				</main>
 
-				<PageFooter />
+				<PageFooter authorName={pageProps.user?.name} socials={pageProps.user?.socials} />
 			</div>
-		</AppProvider>
+		</>
 	);
 }

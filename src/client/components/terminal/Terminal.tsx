@@ -67,7 +67,7 @@ export const Terminal: React.FC<TerminalProps> = ({
 		<div
 			ref={containerRef}
 			onClick={handleTerminalClick}
-			className={`box-border flex h-full flex-col overflow-y-auto rounded-xl border border-[#222222] bg-black p-6 font-mono text-[14px] leading-relaxed text-gray-300 ${className}`}
+			className={`box-border flex h-full flex-col overflow-y-auto rounded-b-xl border border-[#222222] bg-black p-6 font-mono text-[14px] leading-relaxed text-gray-300 ${className}`}
 		>
 			<style>{`
 				@keyframes terminal-blink {

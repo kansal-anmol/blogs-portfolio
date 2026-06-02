@@ -1,17 +1,18 @@
 import React from 'react';
 
-// Constants
-import { USER } from '../../../shared/constants/user';
-
 // Types
+import type { User } from '@/src/shared/types';
 import type { Command } from '../../components/terminal/types';
 
 export const CONTACT_COMMAND: Command = {
 	id: 'contact',
 	label: 'contact',
 	helpText: 'Renders active social networking profile links',
-	renderOutput: () => {
-		const socials = USER.socials.map((social) => ({
+	renderOutput: ({ command }) => {
+		const user = command.meta?.user as User;
+		if (!user) return null;
+
+		const socials = user.socials.map((social) => ({
 			...social,
 			displayUrl: social.url.replace(/^https?:\/\/(www\.)?/, ''),
 		}));

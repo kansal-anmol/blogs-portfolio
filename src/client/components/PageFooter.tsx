@@ -1,12 +1,21 @@
-import { SOCIALS } from '@/src/client/constants/social';
-import { USER } from '../../shared/constants/user';
+import { SOCIAL_ICONS } from '@/src/client/constants/social';
+import type { UserSocial } from '@/src/shared/types';
 
-export const PageFooter = () => {
+interface PageFooterProps {
+	authorName: string;
+	socials: UserSocial[];
+}
+
+export const PageFooter = ({ authorName, socials }: PageFooterProps) => {
+	const activeSocials = (socials || [])
+		.filter((s) => SOCIAL_ICONS[s.name])
+		.map((s) => ({ name: s.name, href: s.url, icon: SOCIAL_ICONS[s.name] }));
+
 	return (
 		<footer className="border-t border-[#222222] bg-[#0a0a0a] py-12">
 			<div className="mx-auto flex max-w-6xl flex-col items-center justify-center gap-6 px-6">
 				<div className="flex items-center gap-4">
-					{SOCIALS.map(({ name, href, icon: Icon }) => (
+					{activeSocials.map(({ name, href, icon: Icon }) => (
 						<a
 							key={name}
 							href={href}
@@ -20,7 +29,7 @@ export const PageFooter = () => {
 					))}
 				</div>
 				<p className="font-heading text-sm font-medium text-neutral-500">
-					© {new Date().getFullYear()} {USER.name}
+					© {new Date().getFullYear()} {authorName}
 				</p>
 			</div>
 		</footer>

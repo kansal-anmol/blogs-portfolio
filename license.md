@@ -16,14 +16,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## 🚫 Personal Brand & Content Restrictions (All Rights Reserved)
 
-The permission granted by the MIT License above **does NOT** extend to any personal branding, custom media files, database mockups, or proprietary text content contained within this repository. 
+The permission granted by the MIT License above **does NOT** extend to any personal branding, custom media files, database mockups, or proprietary text content contained within this repository.
 
 All rights are strictly reserved and prohibited from public replication or direct redistribution for:
-1. **Personal Identity**: The name "Anmol Kansal", customized monograms (e.g., "AK"), and profile images/avatars (including `/public/assets/profile.jpg`).
+
+1. **Personal Identity**: The name "Anmol Kansal", customized monograms (e.g., "AK"), and profile images/avatars (including `/public/assets/profile.png`).
 2. **Textual Content**: All markdown blog posts (`_posts/`), descriptions, resume bio sections, work experience histories, list achievements, and personal metadata.
 3. **Imagery & Media**: Project mockups, personal graphics, custom diagrams, and corporate logo assets.
 
 ### Permitted Reuse Guidelines
-You are **encouraged and welcome** to fork this repository, study the layout, and adapt the underlying React components, CSS files, configurations, and general technical architecture to build your own portfolio. 
+
+You are **encouraged and welcome** to fork this repository, study the layout, and adapt the underlying React components, CSS files, configurations, and general technical architecture to build your own portfolio.
 
 However, you **must** replace all personal copy, achievements, experiences, career summaries, credentials, blog post files, and pictures with your own original content before deploying, hosting, or making your derived portfolio public.

@@ -27,8 +27,8 @@ export const PageNavbar = () => {
 				<Link href="/" className="group flex items-center gap-2">
 					<div className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg border border-[#222222] transition-all duration-300 group-hover:border-[#b5f542] group-hover:shadow-[0_0_10px_rgba(181,245,66,0.15)]">
 						<img
-							src="/assets/profile.jpg"
-							alt="Anmol Kansal"
+							src="/assets/profile.png"
+							alt="Profile Picture"
 							className="h-full w-full object-cover"
 						/>
 					</div>

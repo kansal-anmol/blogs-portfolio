@@ -1,3 +1,4 @@
+import { Post } from '@/src/shared/types';
 import type { Command } from '../../components/terminal/types';
 
 export const BLOGS_COMMAND: Command = {
@@ -8,7 +9,7 @@ export const BLOGS_COMMAND: Command = {
 		const trimmed = rawInput.trim();
 		const parts = trimmed.split(/\s+/);
 		const args = parts.slice(1);
-		let posts = command.meta?.posts || [];
+		let posts: Post[] = command.meta?.posts || [];
 
 		if (args.includes('--tag')) {
 			const tagIdx = args.indexOf('--tag');
@@ -22,9 +23,7 @@ export const BLOGS_COMMAND: Command = {
 				);
 			}
 
-			posts = posts.filter((post: any) =>
-				post.tags?.some((t: any) => t.name.toLowerCase() === tagValue),
-			);
+			posts = posts.filter((post) => post.tags?.some((t) => t.name.toLowerCase() === tagValue));
 		}
 
 		if (posts.length === 0) {
@@ -33,7 +32,7 @@ export const BLOGS_COMMAND: Command = {
 
 		return (
 			<div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-				{posts.map((post: any, index: number) => (
+				{posts.map((post, index) => (
 					<div key={post.id} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
 						<span style={{ color: '#b5f542', fontWeight: 'bold' }}>[{index + 1}]</span>
 						<span style={{ color: '#a3a3a3', whiteSpace: 'nowrap' }}>

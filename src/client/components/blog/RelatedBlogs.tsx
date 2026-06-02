@@ -1,4 +1,4 @@
-import type { Post as Blog } from '@/lib/types';
+import type { Post as Blog } from '@/src/shared/types';
 
 import { BlogCard } from '@/src/client/components/BlogCard';
 

@@ -13,22 +13,25 @@ import { TableOfContents } from '@/src/client/components/blog/TableOfContents';
 import { TagsRow } from '@/src/client/components/blog/TagsRow';
 import { Container } from '@/src/client/components/Container';
 import { MarkdownToHtml } from '@/src/client/components/markdown/MarkdownToHtml';
+import { PageMetadata } from '@/src/client/components/PageMetadata';
 
 // Data
-import { getAllBlogs, getPostBySlug } from '@/lib/local-blogs';
+import { getAllBlogs, getPostBySlug, getUserData } from '@/src/server';
 
 // Types
-import type { Post as Blog, StaticPage } from '@/lib/types';
+import type { Post as Blog, StaticPage, User } from '@/src/shared/types';
 
 type BlogProps = {
 	type: 'blog';
 	blog: Blog;
 	relatedBlogs: Blog[];
+	user: User;
 };
 
 type PageProps = {
 	type: 'page';
 	page: StaticPage;
+	user: User;
 };
 
 type Props = BlogProps | PageProps;
@@ -44,7 +47,7 @@ const highlightJsMonokaiTheme =
 	'.hljs{display:block;overflow-x:auto;padding:.5em;background:#23241f}.hljs,.hljs-subst,.hljs-tag{color:#f8f8f2}.hljs-emphasis,.hljs-strong{color:#a8a8a2}.hljs-bullet,.hljs-link,.hljs-literal,.hljs-number,.hljs-quote,.hljs-regexp{color:#ae81ff}.hljs-code,.hljs-section,.hljs-selector-class,.hljs-title{color:#a6e22e}.hljs-strong{font-weight:700}.hljs-emphasis{font-style:italic}.hljs-attr,.hljs-keyword,.hljs-name,.hljs-selector-tag{color:#f92672}.hljs-attribute,.hljs-symbol{color:#66d9ef}.hljs-class .hljs-title,.hljs-params{color:#f8f8f2}.hljs-addition,.hljs-built_in,.hljs-builtin-name,.hljs-selector-attr,.hljs-selector-id,.hljs-selector-pseudo,.hljs-string,.hljs-template-variable,.hljs-type,.hljs-variable{color:#e6db74}.hljs-comment,.hljs-deletion,.hljs-meta{color:#75715e}';
 
 // Main Blog Page Component
-const BlogComponent = ({ blog, relatedBlogs }: BlogProps) => {
+const BlogComponent = ({ blog, relatedBlogs, user }: BlogProps) => {
 	const router = useRouter();
 	const [activeHeadingId, setActiveHeadingId] = useState('');
 	const [progress, setProgress] = useState(0);
@@ -118,17 +121,15 @@ const BlogComponent = ({ blog, relatedBlogs }: BlogProps) => {
 
 	return (
 		<>
+			<PageMetadata
+				user={user}
+				title={blog.seo?.title || blog.title}
+				description={blog.seo?.description || blog.subtitle || blog.brief}
+				urlPath={`/blog/${blog.slug}`}
+				ogType="article"
+				ogImage={blog.coverImage?.url || undefined}
+			/>
 			<Head>
-				<title>{blog.seo?.title || blog.title} — Anmol Kansal</title>
-				<link rel="canonical" href={blog.url || undefined} />
-				<meta name="description" content={blog.seo?.description || blog.subtitle || blog.brief} />
-
-				<meta property="twitter:title" content={blog.seo?.title || blog.title} />
-				<meta
-					property="twitter:description"
-					content={blog.seo?.description || blog.subtitle || blog.brief}
-				/>
-
 				<style dangerouslySetInnerHTML={{ __html: highlightJsMonokaiTheme }}></style>
 			</Head>
 
@@ -156,7 +157,7 @@ const BlogComponent = ({ blog, relatedBlogs }: BlogProps) => {
 					<TableOfContents items={tocItems} activeHeadingId={activeHeadingId} />
 				</div>
 
-				<AuthorCard />
+				<AuthorCard user={user} socials={user.socials} />
 
 				<RelatedBlogs blogs={relatedBlogs} />
 			</div>
@@ -167,7 +168,7 @@ const BlogComponent = ({ blog, relatedBlogs }: BlogProps) => {
 export default function BlogPage(props: Props) {
 	return (
 		<div className="dark font-body min-h-screen bg-[#0a0a0a] text-neutral-100 selection:bg-[#b5f542]/20 selection:text-[#b5f542]">
-			<Container className="mx-auto max-w-4xl px-6 pt-10">
+			<Container className="mx-auto max-w-6xl px-6 pt-10">
 				<article className="flex flex-col items-start gap-10 pb-20">
 					{props.type === 'blog' && <BlogComponent {...props} />}
 				</article>
@@ -187,6 +188,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
 
 	const blogId = params.blogId;
 	const blog = await getPostBySlug(blogId);
+	const user = getUserData();
 
 	if (blog) {
 		const allBlogs = await getAllBlogs();
@@ -211,6 +213,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
 				type: 'blog',
 				blog,
 				relatedBlogs: related,
+				user,
 			},
 			revalidate: 60,
 		};

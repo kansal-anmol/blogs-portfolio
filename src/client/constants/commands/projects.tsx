@@ -1,19 +1,20 @@
-// Constants
-import { USER } from '../../../shared/constants/user';
-
 // Types
+import type { User } from '@/src/shared/types';
 import type { Command } from '../../components/terminal/types';
-
-const githubLink = USER.socials.find((s) => s.name.toLowerCase() === 'github')?.url;
 
 export const PROJECTS_COMMAND: Command = {
 	id: 'projects',
 	label: 'projects',
 	helpText: 'Renders featured engineering projects with Source + Demo links',
-	renderOutput: () => {
+	renderOutput: ({ command }) => {
+		const user = command.meta?.user as User;
+		if (!user) return null;
+
+		const githubLink = user.socials.find((s) => s.name.toLowerCase() === 'github')?.url;
+
 		return (
 			<div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-				{USER.projects.map((proj) => (
+				{user.projects.map((proj) => (
 					<div key={proj.title}>
 						<span style={{ color: '#b5f542', fontWeight: 'bold' }}>{proj.title}</span>
 						<div style={{ color: '#a3a3a3', fontSize: '13px' }}>{proj.description}</div>

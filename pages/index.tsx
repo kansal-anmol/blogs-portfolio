@@ -2,83 +2,41 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 
-import { getAllBlogs } from '@/lib/local-blogs';
-import { Post as Blog } from '@/lib/types';
 import { BlogCard } from '@/src/client/components/BlogCard';
-import { SOCIALS } from '@/src/client/constants/social';
-import { USER } from '@/src/shared/constants/user';
+import { PageMetadata } from '@/src/client/components/PageMetadata';
+import { SOCIAL_ICONS } from '@/src/client/constants/social';
+import { getAllBlogs, getUserData } from '@/src/server';
+import { HOST_NAME } from '@/src/shared/constants';
+import { Post as Blog, User } from '@/src/shared/types';
 
 type Props = {
 	initialAllBlogs: Blog[];
+	user: User;
 };
 
-// Next.js Metadata configuration object (Next.js App Router style equivalent / compliance export)
-export const metadata = {
-	title: 'Anmol Kansal | Senior Frontend Engineer',
-	description:
-		'Senior Frontend Engineer specializing in building scalable web apps with React, TypeScript, and Next.js. Architecting premium UI/UX experiences.',
-	openGraph: {
-		title: 'Anmol Kansal | Senior Frontend Engineer',
-		description:
-			'Senior Frontend Engineer specializing in building scalable web apps with React, TypeScript, and Next.js. Architecting premium UI/UX experiences.',
-		type: 'website',
-		url: 'https://anmol-kansal.hashnode.dev',
-		images: [
-			{
-				url: '/assets/profile.jpg',
-				width: 800,
-				height: 800,
-				alt: 'Anmol Kansal',
-			},
-		],
-	},
-	twitter: {
-		card: 'summary_large_image',
-		title: 'Anmol Kansal | Senior Frontend Engineer',
-		description:
-			'Senior Frontend Engineer specializing in building scalable web apps with React, TypeScript, and Next.js. Architecting premium UI/UX experiences.',
-		images: ['/assets/profile.jpg'],
-	},
-};
-
-export default function Index({ initialAllBlogs }: Props) {
-	const skills = USER.skillGroups.flatMap((group) => group.skills).slice(0, 8);
+export default function Index({ initialAllBlogs, user }: Props) {
+	const activeSocials = (user.socials || [])
+		.filter((s) => SOCIAL_ICONS[s.name])
+		.map((s) => ({ name: s.name, href: s.url, icon: SOCIAL_ICONS[s.name] }));
 
 	const jsonLd = {
 		'@context': 'https://schema.org',
 		'@type': 'Person',
-		name: USER.name,
-		jobTitle: USER.role,
+		name: user.name,
+		jobTitle: user.role,
 		worksFor: {
 			'@type': 'Organization',
-			name: USER.company,
+			name: user.company,
 		},
-		url: 'https://anmol-kansal.hashnode.dev',
-		image: '/assets/profile.jpg',
-		sameAs: SOCIALS.map((s) => s.href),
+		url: HOST_NAME,
+		image: '/assets/profile.png',
+		sameAs: activeSocials.map((s) => s.href),
 	};
 
 	return (
 		<>
+			<PageMetadata user={user} />
 			<Head>
-				{/* Primary Metadata */}
-				<title>{metadata.title}</title>
-				<meta name="description" content={metadata.description} />
-
-				{/* Open Graph / Facebook */}
-				<meta property="og:type" content={metadata.openGraph.type} />
-				<meta property="og:url" content={metadata.openGraph.url} />
-				<meta property="og:title" content={metadata.openGraph.title} />
-				<meta property="og:description" content={metadata.openGraph.description} />
-				<meta property="og:image" content={metadata.openGraph.images[0].url} />
-
-				{/* Twitter */}
-				<meta property="twitter:card" content={metadata.twitter.card} />
-				<meta property="twitter:url" content={metadata.openGraph.url} />
-				<meta property="twitter:title" content={metadata.twitter.title} />
-				<meta property="twitter:description" content={metadata.twitter.description} />
-				<meta property="twitter:image" content={metadata.twitter.images[0]} />
-
 				{/* JSON-LD Schema */}
 				<script
 					type="application/ld+json"
@@ -92,18 +50,18 @@ export default function Index({ initialAllBlogs }: Props) {
 				<section className="mx-auto flex max-w-6xl flex-col justify-between gap-12 px-6 pt-20 pb-16 md:flex-row md:items-center md:pt-32 md:pb-24">
 					<div className="flex flex-1 flex-col items-start text-left">
 						<h1 className="font-heading text-5xl leading-[0.9] font-black tracking-tight text-white select-none sm:text-6xl md:text-8xl">
-							{USER.name}
+							{user.name}
 						</h1>
 						<h2 className="font-heading mt-4 text-lg font-bold tracking-wide text-[#b5f542] uppercase sm:mt-6 sm:text-xl md:text-2xl">
-							{USER.role} @ {USER.company}
+							{user.role}
 						</h2>
 						<p className="font-body mt-4 max-w-2xl text-base leading-relaxed text-neutral-400 sm:text-lg md:text-xl">
-							{USER.shortIntro}
+							{user.shortIntro}
 						</p>
 
 						{/* Social Links Row */}
 						<div className="mt-8 flex items-center gap-3">
-							{SOCIALS.map(({ name, href, icon: Icon }) => (
+							{activeSocials.map(({ name, href, icon: Icon }) => (
 								<a
 									key={name}
 									href={href}
@@ -133,8 +91,8 @@ export default function Index({ initialAllBlogs }: Props) {
 					<div className="flex flex-1 items-center justify-center md:justify-end">
 						<div className="group relative flex h-64 w-64 items-center justify-center overflow-hidden rounded-3xl border border-[#222222] bg-[#111111] transition-all duration-500 hover:border-[#b5f542]/50 hover:shadow-[0_0_30px_rgba(181,245,66,0.1)] sm:h-80 sm:w-80 md:h-96 md:w-96">
 							<img
-								src="/assets/profile.jpg"
-								alt="Anmol Kansal Profile Picture"
+								src="/assets/profile.png"
+								alt="Profile Picture"
 								className="h-full w-full object-cover grayscale transition-all duration-700 ease-out group-hover:scale-105 group-hover:grayscale-0"
 							/>
 						</div>
@@ -168,10 +126,12 @@ export default function Index({ initialAllBlogs }: Props) {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
 	const initialAllBlogs = await getAllBlogs();
+	const user = getUserData();
 
 	return {
 		props: {
 			initialAllBlogs,
+			user,
 		},
 		revalidate: 60,
 	};

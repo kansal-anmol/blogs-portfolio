@@ -1,5 +1,5 @@
-import React from 'react';
 import type { UserProject } from '@/src/shared/types';
+import React from 'react';
 
 interface ProjectCardProps {
 	project: UserProject;

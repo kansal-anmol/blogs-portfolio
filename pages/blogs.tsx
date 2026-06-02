@@ -1,43 +1,24 @@
 import { GetStaticProps } from 'next';
-import Head from 'next/head';
 
-import { getAllBlogs } from '@/lib/local-blogs';
 import { BlogGrid } from '@/src/client/components/blogGrid';
-import { Post as Blog } from '@/src/shared/types';
+import { PageMetadata } from '@/src/client/components/PageMetadata';
+import { getAllBlogs, getUserData } from '@/src/server';
+import { Post as Blog, User } from '@/src/shared/types';
 
 type Props = {
 	blogs: Blog[];
+	user: User;
 };
 
-// Next.js Metadata configuration object (Next.js App Router style equivalent / compliance export)
-export const metadata = {
-	title: 'Blog — Anmol Kansal',
-	description:
-		'Articles on TypeScript, React, Next.js, and frontend engineering. Written by Anmol Kansal.',
-	openGraph: {
-		title: 'Blog — Anmol Kansal',
-		description: 'Articles on TypeScript, React, Next.js, and frontend engineering.',
-		url: 'https://www.anmolkansal.in/blogs',
-	},
-	alternates: {
-		canonical: 'https://www.anmolkansal.in/blogs',
-	},
-};
-
-export default function BlogsPage({ blogs }: Props) {
+export default function BlogsPage({ blogs, user }: Props) {
 	return (
 		<>
-			<Head>
-				{/* SEO Head Tags */}
-				<title>{metadata.title}</title>
-				<meta name="description" content={metadata.description} />
-
-				{/* Open Graph */}
-				<meta property="og:title" content={metadata.openGraph.title} />
-				<meta property="og:description" content={metadata.openGraph.description} />
-				<meta property="og:url" content={metadata.openGraph.url} />
-				<link rel="canonical" href={metadata.alternates.canonical} />
-			</Head>
+			<PageMetadata
+				user={user}
+				title="Blog"
+				description="Articles on TypeScript, React, Next.js, and frontend engineering."
+				urlPath="/blogs"
+			/>
 
 			{/* Blogs Page Outer Container in Dark Mode */}
 			<div className="dark font-body min-h-screen bg-[#0a0a0a] text-neutral-100 selection:bg-[#b5f542]/20 selection:text-[#b5f542]">
@@ -63,10 +44,12 @@ export default function BlogsPage({ blogs }: Props) {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
 	const blogs = await getAllBlogs();
+	const user = getUserData();
 
 	return {
 		props: {
 			blogs,
+			user,
 		},
 		revalidate: 60,
 	};
