@@ -40,6 +40,8 @@ export interface UserEducation {
 
 export interface User {
 	name: string;
+	gender: 'male' | 'female' | string;
+	pronouns: string[];
 	role: string;
 	company: string;
 	shortIntro: string;

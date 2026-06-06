@@ -50,6 +50,7 @@
 .scrollbar-none::-webkit-scrollbar {
 	display: none;
 }
+
 .scrollbar-none {
 	-ms-overflow-style: none;
 	scrollbar-width: none;
@@ -77,6 +78,7 @@
 
 html {
 	scroll-behavior: smooth;
+	overflow-y: scroll;
 }
 
 [data-callout] {
@@ -89,21 +91,25 @@ html {
 	border-left-width: 3px;
 	font-family: var(--font-sans), sans-serif;
 }
+
 [data-callout='tip'] {
 	background: #0f1f06;
 	border-color: #b5f542;
 	color: #c8e89a;
 }
+
 [data-callout='info'] {
 	background: #051525;
 	border-color: #3b82f6;
 	color: #93c5fd;
 }
+
 [data-callout='warning'] {
 	background: #1f1200;
 	border-color: #f59e0b;
 	color: #fcd34d;
 }
+
 [data-callout='danger'] {
 	background: #1f0505;
 	border-color: #ef4444;

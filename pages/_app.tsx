@@ -2,7 +2,6 @@
 import { AppProps } from 'next/app';
 import { JetBrains_Mono, Lora } from 'next/font/google';
 import Head from 'next/head';
-import { useEffect } from 'react';
 
 // Components
 import { PageFooter } from '@/src/client/components/PageFooter';
@@ -23,29 +22,13 @@ const jetbrainsMono = JetBrains_Mono({
 	display: 'swap',
 });
 
-const googleAnalytics = `
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){window.dataLayer.push(arguments);}
-	gtag('js', new Date());
-`;
-
 export default function MyApp({ Component, pageProps }: AppProps) {
-	useEffect(() => {
-		(window as any).adjustIframeSize = (id: string, newHeight: string) => {
-			const i = document.getElementById(id);
-			if (!i) return;
-			// eslint-disable-next-line radix
-			i.style.height = `${parseInt(newHeight)}px`;
-		};
-	}, []);
-
 	return (
 		<>
 			<Head>
 				<link rel="icon" type="image/jpeg" href="/assets/profile.png" />
 				<link rel="apple-touch-icon" href="/assets/profile.png" />
 				<meta name="theme-color" content="#000000" />
-				<script dangerouslySetInnerHTML={{ __html: googleAnalytics }} />
 			</Head>
 			<div
 				className={`${lora.variable} ${jetbrainsMono.variable} flex min-h-screen flex-col bg-[#0a0a0a] font-sans text-neutral-100`}

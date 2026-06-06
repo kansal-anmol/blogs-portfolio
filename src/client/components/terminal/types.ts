@@ -8,7 +8,7 @@ export interface Command {
 		command: Command;
 		rawInput: string;
 	}) => React.ReactNode | Promise<React.ReactNode>;
-	meta?: Record<string, any>;
+	meta?: Record<string, unknown>;
 }
 
 // History - Internal

@@ -16,6 +16,7 @@ import { Terminal } from '@/src/client/components/terminal';
 import {
 	ABOUT_COMMAND,
 	BLOGS_COMMAND,
+	CHAT_COMMAND,
 	CONTACT_COMMAND,
 	EXPERIENCE_COMMAND,
 	OPEN_COMMAND,
@@ -64,7 +65,12 @@ export default function TerminalPage({ posts, user }: TerminalPageProps) {
 				...CONTACT_COMMAND,
 				meta: { user },
 			},
+			{
+				...CHAT_COMMAND,
+				meta: { user },
+			},
 		],
+
 		[posts, user],
 	);
 
@@ -87,7 +93,6 @@ export default function TerminalPage({ posts, user }: TerminalPageProps) {
 				<Container className="mx-auto flex h-full max-w-5xl flex-col items-center p-6 md:py-8">
 					<div className="relative flex h-full w-full flex-col rounded-xl border border-[#222222] bg-[#0c0c0c]/40 backdrop-blur-lg">
 						{/* CRT Scanline and Flicker Visual overlays */}
-						<div className="pointer-events-none absolute inset-0 z-20 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[size:100%_4px,6px_100%] opacity-85" />
 						<div className="animate-flicker pointer-events-none absolute inset-0 z-20 bg-transparent opacity-15" />
 
 						{/* Terminal Window Header Bar */}

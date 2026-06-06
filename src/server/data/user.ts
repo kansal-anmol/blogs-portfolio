@@ -3,6 +3,8 @@ import type { User } from '@/src/shared/types';
 export const USER: User = {
 	name: 'Anmol Kansal',
 	role: 'Full Stack Developer',
+	gender: 'male',
+	pronouns: ['he', 'him', 'his'],
 	company: 'D.E. Shaw India',
 	shortIntro:
 		'Hello! I am Anmol Kansal, a Full Stack Developer with close to 5 years of experience. I specialize in React, TypeScript, and state-of-the-art web architectures — designing scalable frontend infrastructures and bringing visual experiences to life.',
