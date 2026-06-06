@@ -9,7 +9,7 @@ export const BLOGS_COMMAND: Command = {
 		const trimmed = rawInput.trim();
 		const parts = trimmed.split(/\s+/);
 		const args = parts.slice(1);
-		let posts: Post[] = command.meta?.posts || [];
+		let posts = (command.meta?.posts || []) as Post[];
 
 		if (args.includes('--tag')) {
 			const tagIdx = args.indexOf('--tag');

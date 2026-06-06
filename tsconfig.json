@@ -30,6 +30,7 @@
 	"exclude": [
 		"node_modules",
 		"src/client/components/markdown/utils/highlight.ts",
-		"src/client/components/markdown/utils/marked.ts"
+		"src/client/components/markdown/utils/marked.ts",
+		".next"
 	]
 }

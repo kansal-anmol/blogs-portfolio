@@ -1,3 +1,4 @@
+import type { Post } from '@/src/shared/types';
 import type { Command } from '../../components/terminal/types';
 
 export const OPEN_COMMAND: Command = {
@@ -9,7 +10,7 @@ export const OPEN_COMMAND: Command = {
 		const parts = trimmed.split(/\s+/);
 		const args = parts.slice(1);
 		const idxStr = args[0];
-		const posts = command.meta?.posts || [];
+		const posts = (command.meta?.posts || []) as Post[];
 
 		if (!idxStr) {
 			return (
