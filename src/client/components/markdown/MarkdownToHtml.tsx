@@ -65,17 +65,20 @@ const Callout = ({ type, children }: { type: string; children: React.ReactNode }
 
 // Custom wrapper to parse pre blocks and extract code content
 const CustomPre = ({ attribs, children }: { attribs: any; children: any }) => {
-	const getPreText = (childs: any[]): string => {
-		return childs
-			.map((c) => {
-				if (c.type === 'text') return c.data;
-				if (c.children) return getPreText(c.children);
-				return '';
-			})
-			.join('');
+	const getPreText = (childs: React.ReactNode): string => {
+		if (!childs) return '';
+		if (typeof childs === 'string') return childs;
+		if (typeof childs === 'number') return String(childs);
+		if (Array.isArray(childs)) {
+			return childs.map(getPreText).join('');
+		}
+		if (React.isValidElement(childs)) {
+			return getPreText((childs as any).props.children);
+		}
+		return '';
 	};
 
-	const text = children ? getPreText(Array.isArray(children) ? children : [children]) : '';
+	const text = children ? getPreText(children) : '';
 
 	return (
 		<div className="group relative my-6 w-full overflow-hidden rounded-xl border border-[#222222] bg-[#0d0d0d]">

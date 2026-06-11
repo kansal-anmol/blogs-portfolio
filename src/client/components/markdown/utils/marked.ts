@@ -1456,7 +1456,11 @@ class HeadingSlugger {
 	markedExport = marked;
 
 	if (typeof module !== 'undefined' && typeof exports === 'object') {
-		module.exports = marked;
+		try {
+			module.exports = marked;
+		} catch {
+			// ignore ESM readonly exports error
+		}
 	} else if (typeof define === 'function' && define.amd) {
 		define(function () {
 			return marked;
